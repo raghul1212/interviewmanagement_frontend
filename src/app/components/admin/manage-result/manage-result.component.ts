@@ -31,13 +31,13 @@ export class ManageResultComponent implements OnInit {
   }
   sendMail(result:Result){
    this.adminService.sendResultMail(result).subscribe(data=>{
-    window.alert(data);
+    window.alert(data.message);
    },error=> window.alert(error.error));
   }
 
   reloadResultData(){
   this.resultService.getAllResult().subscribe(data=>{
-    this.results=data;
+    this.results=data.data;
   });
   }
 }

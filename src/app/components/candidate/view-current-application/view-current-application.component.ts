@@ -36,7 +36,7 @@ export class ViewCurrentApplicationComponent implements OnInit {
        window.alert("please enter a valid login credentials to proceed..");
        this.router.navigate(['login']);
      }else{
-      this.candidate=data;
+      this.candidate=data.data;
      }
   
    });

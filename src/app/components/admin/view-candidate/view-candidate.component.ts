@@ -9,7 +9,6 @@ import { Candidate, CandidateService } from 'src/app/services/candidate/candidat
 })
 export class ViewCandidateComponent implements OnInit {
   candidates:any[]=[];
-  shouldViewByCandidateName:boolean=false;
   pageOfItems: Array<any>=[];
   constructor(private candidateService:CandidateService) { }
 
@@ -22,20 +21,11 @@ export class ViewCandidateComponent implements OnInit {
 }
   reloadData(){
     this.candidateService.getAllCandidate().subscribe(data=>{
-      this.candidates=data;
+      this.candidates=data.data;
     });
   }
 
-  viewByCandidateName(){
-    this.shouldViewByCandidateName=true;
-    console.log('view by can name');
-  }
-  showDetails(value:any){
-    console.log(value);
-  //  this.candidateService.getCandidateByName(value.name).subscribe(data=>{
-  //   this.candidates=data;
-  //  });
-
-  }
+ 
+  
 
 }

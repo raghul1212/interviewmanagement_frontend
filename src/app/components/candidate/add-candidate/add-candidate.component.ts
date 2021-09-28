@@ -18,7 +18,7 @@ export class AddCandidateComponent implements OnInit {
   addCandidate(candidate:Candidate){
     this.candidateService.addCandidate(candidate).subscribe(data=>{
       localStorage.setItem('canEmail',candidate.emailId as any as string);
-      window.alert(data);
+      window.alert(data.message);
       this.router.navigate(['viewCurrentApplication']);
     },error=> window.alert(error.error)
     );

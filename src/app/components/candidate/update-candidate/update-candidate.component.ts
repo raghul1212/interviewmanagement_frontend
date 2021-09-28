@@ -15,10 +15,7 @@ jobRoles:any[]=['Java Developer','Python Developer','Testing','HR'];
 
   ngOnInit(): void {
     this.id=this.activaedRoute.snapshot.params['id'];
-    this.candidateService.getCandidateById(this.id).subscribe(data=>{
-      this.candidate=data;
-    },error=> window.alert(error.error)
-    );
+    this.reloadCandidateData();
       
     }
   
@@ -26,8 +23,14 @@ jobRoles:any[]=['Java Developer','Python Developer','Testing','HR'];
     candidate.id=this.id;
     candidate.addedOn=this.candidate.addedOn;
    this.candidateService.updateCandidate(candidate).subscribe(data=>{
-     window.alert(data);
+     window.alert(data.message);
    },error=> window.alert(error.error));
+  }
+  reloadCandidateData(){
+    this.candidateService.getCandidateById(this.id).subscribe(data=>{
+      this.candidate=data.data;
+    },error=> window.alert(error.error)
+    );
   }
 
 }

@@ -14,14 +14,16 @@ export class ViewCandidateEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.params['id'];
-    this.interviewService.getInterviewById(this.id).subscribe(data=>{
-      this.interview=data;
-    },error=> window.alert(error.error)
-    );
+    this.reloadInterviewData();
   }
 
   backToList(){
     this.router.navigate(['manageInterview']);
   }
-
+reloadInterviewData(){
+  this.interviewService.getInterviewById(this.id).subscribe(data=>{
+    this.interview=data.data;
+  },error=> window.alert(error.error)
+  );
+}
 }

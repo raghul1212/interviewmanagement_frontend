@@ -18,7 +18,7 @@ result:Result={};
   }
 reloadResultData(){
   this.resultService.getResultById(this.id).subscribe(data=>{
-    this.result=data;
+    this.result=data.data;
   },error=>window.alert(error.error));
   }
 
@@ -27,7 +27,7 @@ reloadResultData(){
     result.interview=this.result.interview;
     result.addedOn=this.result.addedOn;
     this.resultService.updateResult(result).subscribe(data=>{
-      window.alert(data);
+      window.alert(data.message);
       this.router.navigate(['manageResult']);
     },error=>window.alert(error.error));
   }

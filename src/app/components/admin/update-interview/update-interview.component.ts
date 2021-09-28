@@ -52,36 +52,33 @@ updateInterview(interview:any){
       }
     }
     this.interviewService.updateInterview(interview).subscribe(data=>{
-      window.alert(data);
+      window.alert(data.message);
       this.shouldSendMail=true;
     });
    
-  }else{
-    console.log('this interview is not updated');
   }
   
 }
   sendMail(interview:any){
     this.adminService.sendRescheduledInterviewMail(interview.canId,interview.empId,interview).subscribe(data=>{
-      window.alert(data);
+      window.alert(data.message);
     },error=> window.alert(error.error));
-    console.log('mail sent');
   }
 
   loadCandidateData(){
     this.candidateService.getAllCandidate().subscribe(data=>{
-      this.candidates=data;
+      this.candidates=data.data;
     });
   }
 
   loadEmployeeData(){
     this.employeeService.getAllEmployee().subscribe(data=>{
-      this.employees=data;
+      this.employees=data.data;
     });
   }
 loadInterviewData(){
   this.interviewService.getInterviewById(this.id).subscribe(data=>{
-    this.interview=data;
+    this.interview=data.data;
     this.candidateId=this.interview.candidate?.id;
     this.employeeId=this.interview.employee?.id;
   },error=>window.alert(error.error));

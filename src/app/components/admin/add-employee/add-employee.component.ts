@@ -15,7 +15,7 @@ export class AddEmployeeComponent implements OnInit {
   }
 addEmployee(employee:Employee){
     this.employeeService.addEmployee(employee).subscribe(data=>{
-      window.alert(data);
+      window.alert(data.message);
     if (confirm("Do you want to add one more employee?") == true) {
       location.reload();
     } else {

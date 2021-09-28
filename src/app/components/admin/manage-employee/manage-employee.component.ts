@@ -37,8 +37,8 @@ export class ManageEmployeeComponent implements OnInit {
 
   reloadData(){
     this.employeeService.getAllEmployee().subscribe(data=>{
-      this.employees=data;
-    });
+      this.employees=data.data;
+    },error=> window.alert(error.error));
   }
 
 }

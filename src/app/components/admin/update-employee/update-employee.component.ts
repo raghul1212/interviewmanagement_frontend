@@ -14,19 +14,22 @@ export class UpdateEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.params['id'];
-    this.employeeService.getEmployeeById(this.id).subscribe(data=>{
-    this.employee=data;
-  })
+   this.reloadEmployeeData();
   }
 
   updateEmployee(employee:Employee){
     employee.id=this.id;
     employee.addedOn=this.employee.addedOn;
     this.employeeService.updateEmployee(employee).subscribe(data=>{
-     window.alert(data);
+     window.alert(data.message);
      this.router.navigate(['manageEmployee']);
    },error=> window.alert(error.error)
    );
+  }
+  reloadEmployeeData(){
+    this.employeeService.getEmployeeById(this.id).subscribe(data=>{
+      this.employee=data.data;
+    },error=> window.alert(error.error));
   }
 
 }

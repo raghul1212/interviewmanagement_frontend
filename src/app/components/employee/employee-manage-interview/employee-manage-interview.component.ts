@@ -21,8 +21,8 @@ export class EmployeeManageInterviewComponent implements OnInit {
      window.alert('Log in to continue');
      this.router.navigate(['login']);
    }
-    this.reloadInterviewData();
     this.reloadEmployeeData();
+    this.reloadInterviewData();
   }
 
   onChangePage(pageOfItems: Array<any>) {
@@ -40,7 +40,7 @@ export class EmployeeManageInterviewComponent implements OnInit {
    const employee=new Employee();
    employee.emailId=this.empEmail;
  this.interviewService.getInterviewByEmployeeEmailId(employee).subscribe(data=>{
-  this.interviews=data;
+  this.interviews=data.data;
  });
 
   }
@@ -53,7 +53,7 @@ export class EmployeeManageInterviewComponent implements OnInit {
         window.alert("Please enter a valid login credential to proceed..");
         this.router.navigate(['login']);
       }else{
-        this.employee=data;
+        this.employee=data.data;
       }
      
     });

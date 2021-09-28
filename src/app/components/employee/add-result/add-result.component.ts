@@ -19,7 +19,7 @@ export class AddResultComponent implements OnInit {
 addResult(result:any){
   if (confirm("Do you want to add result for this interview?") == true) {
     this.resultService.addResult(this.id,result).subscribe(data=>{
-      window.alert(data);
+      window.alert(data.message);
       this.router.navigate(['employeeManageInterview']);
     },error=>window.alert(error.error));
  

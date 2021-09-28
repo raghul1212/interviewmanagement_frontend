@@ -15,7 +15,7 @@ export class ManageInterviewComponent implements OnInit {
   constructor(private router:Router,private interviewService:InterviewService) { }
 
   ngOnInit(): void {
-    //this.reloadData();
+    this.reloadData();
   }
 
   onChangePage(pageOfItems: Array<any>) {
@@ -24,7 +24,7 @@ export class ManageInterviewComponent implements OnInit {
 }
   reloadData(){
    this.interviewService.getAllInterview().subscribe(data=>{
-    this.interviews=data;
+    this.interviews=data.data;
    });
   }
 
@@ -36,7 +36,7 @@ export class ManageInterviewComponent implements OnInit {
     if(window.confirm('Are you sure to cancel this interview?')==true){
       interview.status='Cancelled';
       this.interviewService.updateInterview(interview).subscribe(data=>{
-        window.alert(data);
+        window.alert(data.message);
       },error=> window.alert(error.error));
      
     }

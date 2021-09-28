@@ -22,20 +22,15 @@ interviewTypes:any[]=['Technical Interview Round 1','Technical Interview Round 2
   constructor(private candidateService:CandidateService,private employeeService:EmployeeService,private interviewService:InterviewService,private adminService:AdminService) { }
 
   ngOnInit(): void {
-    this.candidateService.getAllCandidate().subscribe(data=>{
-      this.candidates=data;
-    },error=>window.alert(error.error)
-    );
-    this.employeeService.getAllEmployee().subscribe(data=>{
-      this.employees=data;
-    },error=>window.alert(error.error)
-    );
+    this.reloadCandidateData();
+    this.reloadEmployeeData();
+   
   }
   scheduleInterview(interview:any){
     interview.status='Live';
     if (confirm("Do you want to schedule this interview?") == true) {
     this.interviewService.addInterview(interview.candidateId,interview.empId,interview).subscribe(data=>{
-      window.alert(data);
+      window.alert(data.message);
     this.shouldSendMail=true;
    
     },error=> window.alert(error.error)
@@ -57,8 +52,7 @@ interviewTypes:any[]=['Technical Interview Round 1','Technical Interview Round 2
   sendMail(interview:any){
    
     this.adminService.sendScheduledInterviewMail(this.candidateId,this.empId,interview).subscribe(data=>{
-      window.alert(data);
-      console.log('mail sent');
+      window.alert(data.message);
     },error=> window.alert(error.error));
   }
 validateDate(date:Date){
@@ -70,6 +64,19 @@ validateTime(time:any){
     const minTime:any="10:00";
     const maxTime:any="20:00";
     this.isValidTime=time>=minTime && time <=maxTime;
+}
+
+reloadEmployeeData(){
+  this.employeeService.getAllEmployee().subscribe(data=>{
+    this.employees=data.data;
+  },error=>window.alert(error.error)
+  );
+}
+reloadCandidateData(){
+  this.candidateService.getAllCandidate().subscribe(data=>{
+    this.candidates=data.data;
+  },error=>window.alert(error.error)
+  );
 }
 
 }
