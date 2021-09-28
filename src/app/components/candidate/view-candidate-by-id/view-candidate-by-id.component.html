@@ -1,0 +1,38 @@
+<app-candidate></app-candidate>
+<div style="text-align: center;">
+    <h2>Candidate Details</h2> 
+    
+    <hr/>
+    <div>
+        <table class="table  table-striped"> <!--table-striped used to create alternate dark and light rows-->
+         
+                <td>
+                    <tr>
+                        <th>ID</th> <td>{{candidate?.id}}</td>
+                        </tr>
+                        <tr>
+                            <th>First Name</th> <td>{{candidate?.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <th>Last Name</th> <td>{{candidate?.lastName}}</td>
+                        </tr>
+                       <tr>
+                        <th>Email</th>  <td>{{candidate?.emailId}}</td>
+                       </tr>
+                        <tr>
+                            <th>Phone Number</th> <td>{{candidate?.phoneNumber}}</td>
+                        </tr>
+                        <tr>
+                            <th>Experience</th><td>{{candidate?.experience}}</td>
+                        </tr>
+                        <tr>
+                            <th>Resume Link</th><td><a [href]="candidate?.resumeLink" target="_blank">click here</a></td>
+                        </tr>
+                </td>
+        
+          
+          </table>
+    <button (click)="backToList()" class="btn btn-primary">Back to Interview List</button><br>
+    
+    </div>
+
