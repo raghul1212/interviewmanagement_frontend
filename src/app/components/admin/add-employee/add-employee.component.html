@@ -1,0 +1,68 @@
+<app-admin></app-admin>
+<div class="container" id='center'>
+    <div class="jumbotron" >
+    <form #userForm="ngForm" (ngSubmit)='userForm.form.valid && addEmployee(userForm.value)' >
+        <h3>Employee Registration</h3><br>
+          <div class="form-group col-md-10">
+            <label for="firstname">Enter First Name</label>
+            <input type="text" class="form-control" name="firstName" placeholder="Enter First Name" #firstName="ngModel" ngModel required>
+          </div>
+          <div class="text-danger">
+            <small *ngIf="(firstName.touched || userForm.submitted) && firstName.errors?.required">First name is required</small>
+          </div>
+          <br/>
+          <div class="form-group col-md-10">
+            <label for="lastname">Enter Last Name</label>
+            <input type="text" class="form-control" name="lastName" placeholder="Enter Last Name" #lastName="ngModel" ngModel required>
+          </div>
+          <div class="text-danger">
+            <small *ngIf="(lastName.touched || userForm.submitted) && lastName.errors?.required">Last name is required</small>
+          </div>
+          <br/>
+
+          <div class="form-group col-md-10">
+            <label for="employeeid">Enter Employee Id</label>
+            <input type="number" class="form-control" min="100000" max="999999" name="employeeId" placeholder="Enter Employee Id" #employeeId="ngModel" ngModel required>
+          </div>
+          <div class="text-danger">
+            <small *ngIf="(employeeId.touched || userForm.submitted) && employeeId.errors?.required">Employee Id is required</small>
+            <small *ngIf="employeeId.errors?.min">Employee Id must be greater than or equal to 100000</small>
+            <small *ngIf="employeeId.errors?.max">Employee Id must be less than or equal to 999999</small>
+          </div>
+          <br/>
+
+          <div class="form-group col-md-10">
+            <label for="designationid">Enter Designation Id</label>
+            <input type="number" class="form-control" min="10000" max="99999" name="designationId" placeholder="Enter Designation Id" #designationId="ngModel" ngModel required>
+          </div>
+          <div class="text-danger">
+            <small *ngIf="(designationId.touched || userForm.submitted) && designationId.errors?.required">Designation Id is required</small>
+            <small *ngIf="designationId.errors?.min">Designation Id must be greater than or equal to 10000</small>
+            <small *ngIf="designationId.errors?.max">Designation Id must be less than or equal to 99999</small>
+          </div>
+          <br/>
+
+          <div class="form-group col-md-10">
+            <label for="email">Enter Email Address</label>
+            <input type="email" class="form-control" name="emailId" pattern="^[\w!#$%&’*+/=?`{|}~^-]+(?:\.[\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$" placeholder="Enter Email Address" #emailId="ngModel" ngModel required>
+          </div>
+          <div class="text-danger">
+            <small *ngIf="(emailId.touched || userForm.submitted) && emailId.errors?.required">Email address is required</small>
+            <small *ngIf="emailId?.errors?.pattern">Enter a valid email address</small>
+          </div>
+          <br/>
+
+          <div class="form-group col-md-10">
+            <label for="phone">Enter Phone Number</label>
+            <input type="text" class="form-control" name="phoneNumber" pattern="^(\+\d{1,3}[- ]?)?\d{10}$" placeholder="Enter Phone Number" #phoneNumber="ngModel" ngModel required>
+          </div>
+          <div class="text-danger">
+            <small *ngIf="(phoneNumber.touched || userForm.submitted) && phoneNumber.errors?.required">Phone number is required</small>
+            <small *ngIf="phoneNumber?.errors?.pattern">Enter a valid phone number</small>
+          </div>
+          <br/>
+        <button type="submit" class="btn btn-success">Add Employee</button>
+      </form>
+</div>
+</div>
+

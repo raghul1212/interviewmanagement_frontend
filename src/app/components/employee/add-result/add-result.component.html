@@ -1,0 +1,40 @@
+<app-employee></app-employee>
+<div class="container" id='center'>
+    <div class="jumbotron" >
+    <form #userForm="ngForm" (ngSubmit)='userForm.form.valid && addResult(userForm.value)' >
+        <h3>Add Result</h3><br>
+        <div class="form-group col-md-10">
+            <label for="interviewid">Result for interview ID</label>
+          <input class="form-control" name='interviewId' [(ngModel)]=id ngModel readonly>
+          </div>
+          <br/>
+
+          <div class="form-group col-md-10">
+            <label for="remarks">Enter Remarks</label>
+           <textarea  name="remarks" rows="3" cols="50" minlength="6" class="form-control" #remarks="ngModel" placeholder="Enter Remarks" ngModel required></textarea>
+          </div>
+          <div class="text-danger">
+            <small *ngIf="(remarks.touched || userForm.submitted) && remarks.errors?.required">Remarks is required</small>
+            <small *ngIf="remarks.errors?.minlength">Remarks must have at least 6 characters</small>
+          </div>
+          <br/>
+
+          <div class="form-group col-md-10">
+            <label for="status">Choose Status</label>
+            <select class="form-control"  name="status"  #status="ngModel" ngModel required>
+                <option value="" selected disabled></option>
+                <option value="Selected">Selected</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+          <div class="text-danger">
+            <small *ngIf="(status.touched || userForm.submitted) && status.errors?.required">Status is required</small>
+          </div>
+          <br/>
+          
+        <button type="submit" class="btn btn-success">Add Result</button>
+      </form>
+</div>
+</div>
+
+

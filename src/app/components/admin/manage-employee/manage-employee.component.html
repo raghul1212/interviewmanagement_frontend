@@ -1,0 +1,52 @@
+<app-admin></app-admin>
+<div class="panel panel-primary text-center">
+  <div class="panel-heading">
+    <h2>Employee List</h2>
+  </div>
+  <br>
+  <div class="panel-body" *ngIf="employees.length > 0;else elseBlock">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+           <th>Email</th>
+           <th>Phone Number</th>
+           <th>Employee ID</th>
+           <th>Designation ID</th>
+           <th>Added on</th>
+           <th>updated on</th>
+           <th>updated by</th>
+           <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of pageOfItems">
+          <td>{{employee.id}}</td>
+          <td>{{employee.firstName}}</td>
+          <td>{{employee.lastName}}</td>
+          <td>{{employee.emailId}}</td>
+          <td>{{employee.phoneNumber}}</td>
+          <td>{{employee.employeeId}}</td>
+          <td>{{employee.designationId}}</td>
+          <td>{{employee.addedOn}}</td>
+          <td>{{employee.updatedOn}}</td>
+          <td>{{employee.updatedBy}}</td>
+            <td><button (click)="deleteEmployee(employee.id)" class="btn btn-danger">Delete</button>
+                <button (click)="updateEmployee(employee.id)" class="btn btn-info">Update</button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="card-footer pb-0 pt-3">
+      <jw-pagination [items]="employees" (changePage)="onChangePage($event)"></jw-pagination>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <h5>No Employee is found at the moment</h5>
+  </ng-template>
+</div>
+
+
+

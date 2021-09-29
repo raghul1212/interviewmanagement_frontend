@@ -1,0 +1,47 @@
+<app-employee></app-employee>
+<div class="panel panel-primary text-center">
+  <div class="panel-heading">
+    <h2>Interview List for {{employee.firstName}} {{employee.lastName}}</h2>
+  </div>
+  <br>
+  <div class="panel-body" *ngIf="interviews.length > 0;else elseBlock">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Call Scheduled Date</th>
+           <th>Call Scheduled Time</th>
+           <th>Status</th>
+           <th>Candidate ID</th>
+           <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let interview of pageOfItems">
+          <td>{{interview.id}}</td>
+          <td>{{interview.interviewType}}</td>
+          <td>{{interview.callScheduledDate}}</td>
+          <td>{{interview.callScheduledTime}}</td>
+          <td>{{interview.status}}</td>
+          <td>{{interview.candidate?.id}}</td>
+            <td>
+                <button (click)="addResult(interview.id)" class="btn btn-primary">Add Result</button><br><br>
+                <button (click)="viewCandidate(interview.candidate.id)" class="btn btn-secondary">View</button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="card-footer pb-0 pt-3">
+      <jw-pagination [items]="interviews" (changePage)="onChangePage($event)"></jw-pagination>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <h5>No Interview is found at the moment</h5>
+  </ng-template>
+</div>
+
+
+
+
+

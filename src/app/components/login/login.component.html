@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+  </head>
+  <body class="text-center">
+    
+<main class="form-signin">
+  <form  #userForm="ngForm" (ngSubmit)='onLogin(userForm.value)'>
+   
+    <h1 class="h3 mb-3 fw-normal">Log in</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput" name="username" pattern="^[\w!#$%&’*+/=?`{|}~^-]+(?:\.[\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$" #username="ngModel" ngModel placeholder="username"  required>
+      <label for="floatingInput">Username</label>
+    </div>
+    <div *ngIf="username.invalid &&(username?.touched||username?.dirty)">
+        <small *ngIf="username?.errors?.required" class="text-danger">Username is required</small>
+        <small *ngIf="username?.errors?.pattern" class="text-danger">Enter a valid username</small>
+    </div>
+   
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" name="password" minlength="6" #password="ngModel" ngModel placeholder="Password"  required>
+      <label for="floatingPassword">Password</label>
+    </div>
+        <div *ngIf="password.invalid &&(password?.touched||password?.dirty)">
+            <small *ngIf="password?.errors?.required" class="text-danger">Password is required</small>
+            <small *ngIf="password?.errors?.minlength" class="text-danger">Password must be atleast 6 letters</small>
+          </div>
+    
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+   
+  </form>
+</main>
+
+
+    
+  </body>
+</html>
+
+
