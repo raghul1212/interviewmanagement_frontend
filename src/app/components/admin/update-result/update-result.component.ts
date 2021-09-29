@@ -19,16 +19,17 @@ result:Result={};
 reloadResultData(){
   this.resultService.getResultById(this.id).subscribe(data=>{
     this.result=data.data;
-  },error=>window.alert(error.error));
+  },error=> window.alert(error.error.message));
   }
 
   updateResult(result:any){
     result.id=this.id;
     result.interview=this.result.interview;
     result.addedOn=this.result.addedOn;
+    result.updatedBy=localStorage.getItem('adminEmail') as any as string;
     this.resultService.updateResult(result).subscribe(data=>{
       window.alert(data.message);
       this.router.navigate(['manageResult']);
-    },error=>window.alert(error.error));
+    },error=> window.alert(error.error.message));
   }
 }

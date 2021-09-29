@@ -22,14 +22,15 @@ jobRoles:any[]=['Java Developer','Python Developer','Testing','HR'];
   updateCandidate(candidate:Candidate){
     candidate.id=this.id;
     candidate.addedOn=this.candidate.addedOn;
+    candidate.updatedBy=localStorage.getItem('canEmail') as any as string;
    this.candidateService.updateCandidate(candidate).subscribe(data=>{
      window.alert(data.message);
-   },error=> window.alert(error.error));
+   },error=> window.alert(error.error.message));
   }
   reloadCandidateData(){
     this.candidateService.getCandidateById(this.id).subscribe(data=>{
       this.candidate=data.data;
-    },error=> window.alert(error.error)
+    },error=> window.alert(error.error.message)
     );
   }
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Employee, EmployeeService } from 'src/app/services/employee/employee.service';
 
 @Component({
@@ -25,9 +24,9 @@ export class ManageEmployeeComponent implements OnInit {
   deleteEmployee(id:any){
     if(window.confirm('Are you sure to delete this employee?')==true){
       this.employeeService.deleteEmployeeById(id).subscribe(data=>{
-        window.alert(data);
+        window.alert(data.message);
         this.reloadData();
-       },error=> window.alert(error.error)
+       },error=> window.alert(error.error.message)
        );
     }
   }
@@ -38,7 +37,7 @@ export class ManageEmployeeComponent implements OnInit {
   reloadData(){
     this.employeeService.getAllEmployee().subscribe(data=>{
       this.employees=data.data;
-    },error=> window.alert(error.error));
+    },error=> window.alert(error.error.message));
   }
 
 }

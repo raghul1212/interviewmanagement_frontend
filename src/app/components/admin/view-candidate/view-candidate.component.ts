@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Candidate, CandidateService } from 'src/app/services/candidate/candidate.service';
+import { CandidateService } from 'src/app/services/candidate/candidate.service';
 
 @Component({
   selector: 'app-view-candidate',
@@ -22,6 +21,8 @@ export class ViewCandidateComponent implements OnInit {
   reloadData(){
     this.candidateService.getAllCandidate().subscribe(data=>{
       this.candidates=data.data;
+    },error=>{ 
+      window.alert(error.error.message)
     });
   }
 

@@ -34,7 +34,7 @@
           <td>{{interview.updatedOn}}</td>
           <td>{{interview.updatedBy}}</td>
             <td>
-                <button  *ngIf='interview.status!="Finished"' (click)="updateInterview(interview.id)" class="btn btn-info">Update</button>
+                <button *ngIf='interview.status!="Finished"' (click)="updateInterview(interview.id)" class="btn btn-info">Update</button>
                 <button *ngIf='interview.status!="Finished" && interview.status!="Cancelled"' (click)="cancelInterview(interview)" class="btn btn-danger">Cancel</button>
                 <button (click)="viewCandidateAndEmployee(interview.id)" class="btn btn-secondary">View</button>
             </td>

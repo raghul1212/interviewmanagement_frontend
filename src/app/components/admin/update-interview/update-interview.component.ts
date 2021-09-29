@@ -1,7 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import {  Candidate, CandidateService } from 'src/app/services/candidate/candidate.service';
 import { Employee, EmployeeService } from 'src/app/services/employee/employee.service';
@@ -41,6 +40,7 @@ updateInterview(interview:any){
     interview.id=this.id;
     interview.status='Rescheduled';
     interview.addedOn=this.interview.addedOn;
+    interview.updatedBy=localStorage.getItem('adminEmail') as any as string;
     for(let emp of this.employees){
       if(emp.id==interview.empId){
         interview.employee=emp;
@@ -54,7 +54,7 @@ updateInterview(interview:any){
     this.interviewService.updateInterview(interview).subscribe(data=>{
       window.alert(data.message);
       this.shouldSendMail=true;
-    });
+    },error=> window.alert(error.error.message));
    
   }
   
@@ -62,26 +62,26 @@ updateInterview(interview:any){
   sendMail(interview:any){
     this.adminService.sendRescheduledInterviewMail(interview.canId,interview.empId,interview).subscribe(data=>{
       window.alert(data.message);
-    },error=> window.alert(error.error));
+    },error=> window.alert(error.error.message));
   }
 
   loadCandidateData(){
     this.candidateService.getAllCandidate().subscribe(data=>{
       this.candidates=data.data;
-    });
+    },error=> window.alert(error.error.message));
   }
 
   loadEmployeeData(){
     this.employeeService.getAllEmployee().subscribe(data=>{
       this.employees=data.data;
-    });
+    },error=> window.alert(error.error.message));
   }
 loadInterviewData(){
   this.interviewService.getInterviewById(this.id).subscribe(data=>{
     this.interview=data.data;
     this.candidateId=this.interview.candidate?.id;
     this.employeeId=this.interview.employee?.id;
-  },error=>window.alert(error.error));
+  },error=> window.alert(error.error.message));
 }
 validateDate(date:Date){
   const givenDate=formatDate(date,'yyyy-MM-dd','en_US');

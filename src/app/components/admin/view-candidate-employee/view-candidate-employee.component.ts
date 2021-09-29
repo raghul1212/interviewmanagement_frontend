@@ -23,7 +23,7 @@ export class ViewCandidateEmployeeComponent implements OnInit {
 reloadInterviewData(){
   this.interviewService.getInterviewById(this.id).subscribe(data=>{
     this.interview=data.data;
-  },error=> window.alert(error.error)
+  },error=> window.alert(error.error.message)
   );
 }
 }

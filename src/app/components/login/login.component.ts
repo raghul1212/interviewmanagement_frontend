@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(credential:any){
     if(credential.username=='admin@gmail.com' && credential.password=='admin1'){
+      localStorage.setItem('adminEmail',credential.username);
       window.alert("Welcome admin!");
       this.router.navigate(['admin']);
     } else if(credential.password.match(this.regexEmployee)){

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { Result, ResultService } from 'src/app/services/result/result.service';
 
@@ -32,12 +31,12 @@ export class ManageResultComponent implements OnInit {
   sendMail(result:Result){
    this.adminService.sendResultMail(result).subscribe(data=>{
     window.alert(data.message);
-   },error=> window.alert(error.error));
+   },error=> window.alert(error.error.message));
   }
 
   reloadResultData(){
   this.resultService.getAllResult().subscribe(data=>{
     this.results=data.data;
-  });
+  },error=> window.alert(error.error.message));
   }
 }

@@ -42,16 +42,16 @@ export class EmployeeService {
 
    addEmployee(employee:Employee):Observable<any>{
     const headers=new HttpHeaders().set('content-type','application/json;charset:utf-8');
-    return this.http.post(`${this.baseUrl}`,employee,{headers,responseType:'text'})
+    return this.http.post(`${this.baseUrl}`,employee,{headers})
    }
 
    updateEmployee(employee:Employee):Observable<any>{
     const headers=new HttpHeaders().set('content-type','application/json;charset:utf-8');
-    return this.http.put(`${this.baseUrl}`,employee,{headers,responseType:'text'})
+    return this.http.put(`${this.baseUrl}`,employee,{headers})
    }
 
    deleteEmployeeById(id:number):Observable<any>{
-    return this.http.delete(`${this.baseUrl}/${id}`,{responseType:'text'});//add header if response is not received appropriately
+    return this.http.delete(`${this.baseUrl}/${id}`);//add header if response is not received appropriately
    }
 
 }

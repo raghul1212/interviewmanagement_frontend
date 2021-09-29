@@ -21,12 +21,12 @@ export class ResultService {
    }
    addResult(interviewId:number,result:Result):Observable<any>{
     const headers=new HttpHeaders().set('content-type','application/json;charset:utf-8');
-    return this.http.post(`${this.baseUrl}/${interviewId}`,result,{headers,responseType:'text'})
+    return this.http.post(`${this.baseUrl}/${interviewId}`,result,{headers})
    }
 
    updateResult(result:Result):Observable<any>{
     const headers=new HttpHeaders().set('content-type','application/json;charset:utf-8');
-    return this.http.put(`${this.baseUrl}`,result,{headers,responseType:'text'})
+    return this.http.put(`${this.baseUrl}`,result,{headers})
    }
 /*result related methods end here */
 

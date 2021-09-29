@@ -16,11 +16,13 @@ export class AddCandidateComponent implements OnInit {
   }
 
   addCandidate(candidate:Candidate){
+    localStorage.setItem('canEmail',candidate.emailId as any as string);
+    candidate.updatedBy=localStorage.getItem('canEmail') as any as string;
     this.candidateService.addCandidate(candidate).subscribe(data=>{
-      localStorage.setItem('canEmail',candidate.emailId as any as string);
+      
       window.alert(data.message);
       this.router.navigate(['viewCurrentApplication']);
-    },error=> window.alert(error.error)
+    },error=> window.alert(error.error.message)
     );
    
   }

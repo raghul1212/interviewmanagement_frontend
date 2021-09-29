@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Employee, EmployeeService } from 'src/app/services/employee/employee.service';
 import { Interview, InterviewService } from 'src/app/services/interview/interview.service';
 
@@ -41,7 +40,7 @@ export class EmployeeManageInterviewComponent implements OnInit {
    employee.emailId=this.empEmail;
  this.interviewService.getInterviewByEmployeeEmailId(employee).subscribe(data=>{
   this.interviews=data.data;
- });
+ },error=> window.alert(error.error.message));
 
   }
 
@@ -56,6 +55,6 @@ export class EmployeeManageInterviewComponent implements OnInit {
         this.employee=data.data;
       }
      
-    });
+    },error=> window.alert(error.error.message));
   }
 }

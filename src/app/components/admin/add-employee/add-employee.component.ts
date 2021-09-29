@@ -14,6 +14,7 @@ export class AddEmployeeComponent implements OnInit {
   ngOnInit(): void {
   }
 addEmployee(employee:Employee){
+    employee.updatedBy=localStorage.getItem('adminEmail') as any as string;
     this.employeeService.addEmployee(employee).subscribe(data=>{
       window.alert(data.message);
     if (confirm("Do you want to add one more employee?") == true) {
@@ -21,7 +22,9 @@ addEmployee(employee:Employee){
     } else {
       this.router.navigate(['manageEmployee']);
     }
-    },error=> window.alert(error.error)
+    },error=> {
+      window.alert(error.error.message);
+    }
     );
    
   }

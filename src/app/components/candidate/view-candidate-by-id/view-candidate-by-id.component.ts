@@ -23,7 +23,7 @@ export class ViewCandidateByIdComponent implements OnInit {
   reloadCandidateData(){
     this.candidateService.getCandidateById(this.id).subscribe(data=>{
       this.candidate=data.data;
-     });
+     },error=> window.alert(error.error.message));
   }
 
 }

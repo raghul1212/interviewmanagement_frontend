@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Interview, InterviewService } from 'src/app/services/interview/interview.service';
 import { ResultService } from 'src/app/services/result/result.service';
 
 @Component({
@@ -18,14 +17,13 @@ export class AddResultComponent implements OnInit {
   }
 addResult(result:any){
   if (confirm("Do you want to add result for this interview?") == true) {
+    result.updatedBy=localStorage.getItem('empEmail') as any as string;
     this.resultService.addResult(this.id,result).subscribe(data=>{
       window.alert(data.message);
       this.router.navigate(['employeeManageInterview']);
-    },error=>window.alert(error.error));
+    },error=> window.alert(error.error.message));
  
-  } else {
-    console.log("The Result adding is cancelled!");
-  }
+  } 
  
   
 }

@@ -43,12 +43,12 @@ export class CandidateService {
 
    addCandidate(candidate:Candidate):Observable<any>{
     const headers=new HttpHeaders().set('content-type','application/json;charset:utf-8');
-    return this.http.post(`${this.baseUrl}`,candidate,{headers,responseType:'text'});
+    return this.http.post(`${this.baseUrl}`,candidate,{headers});
    }
 
    updateCandidate(candidate:Candidate):Observable<any>{
     const headers=new HttpHeaders().set('content-type','application/json;charset:utf-8');
-    return this.http.put(`${this.baseUrl}`,candidate,{headers,responseType:'text'});
+    return this.http.put<any>(`${this.baseUrl}`,candidate,{headers});
    }
 
 }

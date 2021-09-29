@@ -20,16 +20,17 @@ export class UpdateEmployeeComponent implements OnInit {
   updateEmployee(employee:Employee){
     employee.id=this.id;
     employee.addedOn=this.employee.addedOn;
+    employee.updatedBy=localStorage.getItem('adminEmail') as any as string;
     this.employeeService.updateEmployee(employee).subscribe(data=>{
      window.alert(data.message);
      this.router.navigate(['manageEmployee']);
-   },error=> window.alert(error.error)
+   },error=> window.alert(error.error.message)
    );
   }
   reloadEmployeeData(){
     this.employeeService.getEmployeeById(this.id).subscribe(data=>{
       this.employee=data.data;
-    },error=> window.alert(error.error));
+    },error=> window.alert(error.error.message));
   }
 
 }

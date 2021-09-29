@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Candidate, CandidateService } from 'src/app/services/candidate/candidate.service';
 
 @Component({
@@ -9,9 +8,7 @@ import { Candidate, CandidateService } from 'src/app/services/candidate/candidat
   styleUrls: ['./view-current-application.component.css']
 })
 export class ViewCurrentApplicationComponent implements OnInit {
-  today:Date=new Date();
   emailId:string=localStorage.getItem('canEmail') as any as string;
-  lastDate:Date=new Date('2021-10-12');
   candidate:Candidate[]=[];
   constructor(private router:Router,private candidateService:CandidateService) { }
 
@@ -39,11 +36,9 @@ export class ViewCurrentApplicationComponent implements OnInit {
       this.candidate=data.data;
      }
   
-   });
+   },error=> window.alert(error.error.message));
   }
 
-  showInterviewDetails(id:any){
-    console.log('details');
-  }
+  
 
 }

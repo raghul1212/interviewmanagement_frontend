@@ -1,7 +1,5 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Interview, InterviewService } from 'src/app/services/interview/interview.service';
 
 @Component({
@@ -25,7 +23,7 @@ export class ManageInterviewComponent implements OnInit {
   reloadData(){
    this.interviewService.getAllInterview().subscribe(data=>{
     this.interviews=data.data;
-   });
+   },error=> window.alert(error.error.message));
   }
 
   updateInterview(id:any){
@@ -34,10 +32,11 @@ export class ManageInterviewComponent implements OnInit {
 
   cancelInterview(interview:any){
     if(window.confirm('Are you sure to cancel this interview?')==true){
+      interview.updatedBy=localStorage.getItem('adminEmail') as any as string;
       interview.status='Cancelled';
       this.interviewService.updateInterview(interview).subscribe(data=>{
         window.alert(data.message);
-      },error=> window.alert(error.error));
+      },error=> window.alert(error.error.message));
      
     }
    

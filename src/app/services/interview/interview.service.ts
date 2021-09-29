@@ -33,12 +33,12 @@ export class InterviewService {
 
    addInterview(candidateId:number,employeeId:number,interview:Interview):Observable<any>{
     const headers=new HttpHeaders().set('content-type','application/json;charset:utf-8');
-    return this.http.post(`${this.baseUrl}/${candidateId}/${employeeId}`,interview,{headers,responseType:'text'})
+    return this.http.post(`${this.baseUrl}/${candidateId}/${employeeId}`,interview,{headers})
    }
 
    updateInterview(interview:Interview):Observable<any>{
     const headers=new HttpHeaders().set('content-type','application/json;charset:utf-8');
-    return this.http.put(`${this.baseUrl}`,interview,{headers,responseType:'text'})
+    return this.http.put(`${this.baseUrl}`,interview,{headers})
    }
 /*interview related methods end here */
 
@@ -78,20 +78,20 @@ export class InterviewService {
    }
 
    getInterviewByEmployeeEmailId(employee:Employee):Observable<any>{
-    //const headers=new HttpHeaders().set('content-type','application/json;charset:utf-8');
-    return this.http.post(`${this.baseUrl}/employee/email`,employee);//add header if response is not received appropriately
+   
+    return this.http.post(`${this.baseUrl}/employee/email`,employee);
    }
 
    getInterviewByEmployeePhone(employee:Employee):Observable<any>{
-    return this.http.post(`${this.baseUrl}/employee/phone`,employee);//add header if response is not received appropriately
+    return this.http.post(`${this.baseUrl}/employee/phone`,employee);
    }
 
    getInterviewByEmployeeId(employee:Employee):Observable<any>{
-    return this.http.post(`${this.baseUrl}/employee/employee-id`,employee);//add header if response is not received appropriately
+    return this.http.post(`${this.baseUrl}/employee/employee-id`,employee);
    }
 
    getInterviewByDesignationId(employee:Employee):Observable<any>{
-    return this.http.post(`${this.baseUrl}/employee/designation-id`,employee);//add header if response is not received appropriately
+    return this.http.post(`${this.baseUrl}/employee/designation-id`,employee);
    }
   /*employee related methods end here */
   

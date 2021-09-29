@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
-import { Interview, InterviewService } from 'src/app/services/interview/interview.service';
+import { InterviewService } from 'src/app/services/interview/interview.service';
 
 @Component({
   selector: 'app-add-interview',
@@ -28,12 +28,13 @@ interviewTypes:any[]=['Technical Interview Round 1','Technical Interview Round 2
   }
   scheduleInterview(interview:any){
     interview.status='Live';
+    interview.updatedBy=localStorage.getItem('adminEmail') as any as string;
     if (confirm("Do you want to schedule this interview?") == true) {
     this.interviewService.addInterview(interview.candidateId,interview.empId,interview).subscribe(data=>{
       window.alert(data.message);
     this.shouldSendMail=true;
    
-    },error=> window.alert(error.error)
+    },error=> window.alert(error.error.message)
     );
     
     } else {
@@ -53,7 +54,7 @@ interviewTypes:any[]=['Technical Interview Round 1','Technical Interview Round 2
    
     this.adminService.sendScheduledInterviewMail(this.candidateId,this.empId,interview).subscribe(data=>{
       window.alert(data.message);
-    },error=> window.alert(error.error));
+    },error=> window.alert(error.error.message));
   }
 validateDate(date:Date){
   const givenDate=formatDate(date,'yyyy-MM-dd','en_US');
@@ -69,13 +70,13 @@ validateTime(time:any){
 reloadEmployeeData(){
   this.employeeService.getAllEmployee().subscribe(data=>{
     this.employees=data.data;
-  },error=>window.alert(error.error)
+  },error=>window.alert(error.error.message)
   );
 }
 reloadCandidateData(){
   this.candidateService.getAllCandidate().subscribe(data=>{
     this.candidates=data.data;
-  },error=>window.alert(error.error)
+  },error=>window.alert(error.error.message)
   );
 }
 
