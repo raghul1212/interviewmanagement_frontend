@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(private router:Router) { }
-  regexEmployee:string="^[emp]\\w{5,29}$";
-  regexCandidate:string="^[can]\\w{5,29}$";
+  regexEmployee:string="^emp[a-zA-Z0-9!@#$%^&*()?]{3,}$";
+  regexCandidate:string="^can[a-zA-Z0-9!@#$%^&*()?]{3,}$";
   ngOnInit(): void {
   }
 
