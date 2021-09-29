@@ -16,12 +16,11 @@ export class EmployeeManageInterviewComponent implements OnInit {
   constructor(private router:Router,private employeeService:EmployeeService,private interviewService:InterviewService) { }
 
   ngOnInit(): void {
-   if(this.empEmail==null){
-     window.alert('Log in to continue');
-     this.router.navigate(['login']);
-   }
-    this.reloadEmployeeData();
-    this.reloadInterviewData();
+    if(this.empEmail!=null){
+      this.reloadEmployeeData();
+      this.reloadInterviewData();
+    }
+    
   }
 
   onChangePage(pageOfItems: Array<any>) {
@@ -38,7 +37,7 @@ export class EmployeeManageInterviewComponent implements OnInit {
   reloadInterviewData(){
    const employee=new Employee();
    employee.emailId=this.empEmail;
- this.interviewService.getInterviewByEmployeeEmailId(employee).subscribe(data=>{
+  this.interviewService.getInterviewByEmployeeEmailId(employee).subscribe(data=>{
   this.interviews=data.data;
  },error=> window.alert(error.error.message));
 

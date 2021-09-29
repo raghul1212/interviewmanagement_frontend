@@ -13,8 +13,8 @@ export class ViewCandidateByIdComponent implements OnInit {
   constructor(private router:Router,private activatedRoute:ActivatedRoute,private candidateService:CandidateService) { }
 
   ngOnInit(): void {
-    this.id=this.activatedRoute.snapshot.params['id'];
-    this.reloadCandidateData();
+      this.id=this.activatedRoute.snapshot.params['id'];
+      this.reloadCandidateData();
   }
 
   backToList(){
