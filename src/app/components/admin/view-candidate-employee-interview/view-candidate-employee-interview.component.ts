@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Result, ResultService } from 'src/app/services/result/result.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { Result, ResultService } from 'src/app/services/result/result.service';
 export class ViewCandidateEmployeeInterviewComponent implements OnInit {
   id:any;
   result:Result={};
-  constructor(private router:Router,private activatedRoute:ActivatedRoute,private resultService:ResultService) { }
+  constructor(private router:Router,private activatedRoute:ActivatedRoute,
+    private resultService:ResultService, private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.params['id'];
@@ -20,11 +22,16 @@ export class ViewCandidateEmployeeInterviewComponent implements OnInit {
   reloadResultData(){
     this.resultService.getResultById(this.id).subscribe(data=>{
       this.result=data.data;
-    },error=> window.alert(error.error.message));
+    },error=> this.showError(error.error.message));
   }
 
   backToList(){
     this.router.navigate(['manageResult']);
   }
+
+  showError(message:string){
+    this.toastr.error(message);
+  }
+ 
 
 }

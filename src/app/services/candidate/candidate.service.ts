@@ -30,15 +30,25 @@ export class CandidateService {
    }
 
    getCandidateByPhone(candidate:Candidate):Observable<any>{
-    return this.http.post(`${this.baseUrl}/phone`,candidate);//add header if response is not received appropriately
+    return this.http.post(`${this.baseUrl}/phone`,candidate);
    }
 
+   getAllExperience():Observable<any>{
+    return this.http.get(`${this.baseUrl}/experience`);
+   }
+   getAllJobRole():Observable<any>{
+    return this.http.get(`${this.baseUrl}/role`);
+   }
    getCandidateByExperience(experinece:number):Observable<any>{
-    return this.http.get(`${this.baseUrl}/experience/${experinece}`);//add header if response is not received appropriately
+    return this.http.get(`${this.baseUrl}/experience/${experinece}`);
    }
 
    getCandidateByRole(role:string):Observable<any>{
-    return this.http.get(`${this.baseUrl}/role/${role}`);//add header if response is not received appropriately
+    return this.http.get(`${this.baseUrl}/role/${role}`);
+   }
+
+   validateRole(candidate:any):Observable<any>{
+    return this.http.post(`${this.baseUrl}/validate-role`,candidate);
    }
 
    addCandidate(candidate:Candidate):Observable<any>{
@@ -60,7 +70,7 @@ export class Candidate{
   emailId?:string;
   phoneNumber?:string;
   jobRole?:string;
-  experience?:number;
+  experience?:string;
   resumeLink?:string;
   interview?:Interview;
   addedOn?:Date;

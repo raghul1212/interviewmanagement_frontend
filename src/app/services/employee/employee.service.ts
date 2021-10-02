@@ -25,19 +25,19 @@ export class EmployeeService {
    }
 
    getEmployeeByEmailId(employee:Employee):Observable<any>{
-    return this.http.post(`${this.baseUrl}/email`,employee);//add header if response is not received appropriately
+    return this.http.post(`${this.baseUrl}/email`,employee);
    }
 
    getEmployeeByPhone(employee:Employee):Observable<any>{
-    return this.http.post(`${this.baseUrl}/phone`,employee);//add header if response is not received appropriately
+    return this.http.post(`${this.baseUrl}/phone`,employee);
    }
 
-   getEmployeeByEmployeeId(employee:Employee):Observable<any>{
-    return this.http.post(`${this.baseUrl}/employee-id`,employee);//add header if response is not received appropriately
+   getEmployeeByDesignation(employee:Employee):Observable<any>{
+    return this.http.post(`${this.baseUrl}/designation-id`,employee);
    }
 
-   getEmployeeByDesignationId(employee:Employee):Observable<any>{
-    return this.http.post(`${this.baseUrl}/designation-id`,employee);//add header if response is not received appropriately
+   getAllDesignation():Observable<any>{
+    return this.http.get(`${this.baseUrl}/designation`);
    }
 
    addEmployee(employee:Employee):Observable<any>{
@@ -51,18 +51,18 @@ export class EmployeeService {
    }
 
    deleteEmployeeById(id:number):Observable<any>{
-    return this.http.delete(`${this.baseUrl}/${id}`);//add header if response is not received appropriately
+    return this.http.delete(`${this.baseUrl}/${id}`);
    }
 
 }
 
 export class Employee{
     id?:number;
-    employeeId?:number;
-    designationId?:number;
+    designation?:string;
     firstName?:string;
     lastName?:string;
     phoneNumber?:string;
+    status?:string;
     emailId?:string;
     interview?:Interview;
     addedOn?:Date;

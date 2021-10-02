@@ -1,5 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/services/admin/admin.service';
 import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
@@ -16,25 +17,26 @@ candidates:any[]=[];
 employees:any[]=[];
 candidateId?:string;
 empId?:string;
-isValidDate:boolean=true;
 isValidTime:boolean=true;
-interviewTypes:any[]=['Technical Interview Round 1','Technical Interview Round 2','Techincal Interview Round 3','HR Interview Round 1','HR Interview Round 2'];
-  constructor(private candidateService:CandidateService,private employeeService:EmployeeService,private interviewService:InterviewService,private adminService:AdminService) { }
+interviewTypes:any;
+todayDate=formatDate(new Date(), 'yyyy-MM-dd','en_us');
+  constructor(private candidateService:CandidateService,private employeeService:EmployeeService
+    ,private interviewService:InterviewService,private adminService:AdminService, private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.reloadCandidateData();
     this.reloadEmployeeData();
-   
+    this.reloadInterviewTypeData();
   }
   scheduleInterview(interview:any){
     interview.status='Live';
     interview.updatedBy=localStorage.getItem('adminEmail') as any as string;
     if (confirm("Do you want to schedule this interview?") == true) {
     this.interviewService.addInterview(interview.candidateId,interview.empId,interview).subscribe(data=>{
-      window.alert(data.message);
+      this.showSuccess(data.message);
     this.shouldSendMail=true;
    
-    },error=> window.alert(error.error.message)
+    },error=> this.showError(error.error.message)
     );
     
     } else {
@@ -53,14 +55,10 @@ interviewTypes:any[]=['Technical Interview Round 1','Technical Interview Round 2
   sendMail(interview:any){
    
     this.adminService.sendScheduledInterviewMail(this.candidateId,this.empId,interview).subscribe(data=>{
-      window.alert(data.message);
-    },error=> window.alert(error.error.message));
+      this.showSuccess(data.message);
+    },error=> this.showError(error.error.message));
   }
-validateDate(date:Date){
-  const givenDate=formatDate(date,'yyyy-MM-dd','en_US');
-  const today=formatDate(new Date(),'yyyy-MM-dd','en_US');
-  this.isValidDate=givenDate>=today;
-}
+
 validateTime(time:any){
     const minTime:any="10:00";
     const maxTime:any="20:00";
@@ -70,14 +68,26 @@ validateTime(time:any){
 reloadEmployeeData(){
   this.employeeService.getAllEmployee().subscribe(data=>{
     this.employees=data.data;
-  },error=>window.alert(error.error.message)
+  },error=>this.showError(error.error.message)
   );
 }
 reloadCandidateData(){
   this.candidateService.getAllCandidate().subscribe(data=>{
     this.candidates=data.data;
-  },error=>window.alert(error.error.message)
+  },error=>this.showError(error.error.message)
   );
 }
 
+reloadInterviewTypeData(){
+  this.interviewService.getAllInterviewType().subscribe(data=>{
+    this.interviewTypes=data.data;
+  });
+}
+showSuccess(message:string){
+  this.toastr.success(message);
+}
+
+showError(message:string){
+  this.toastr.error(message);
+}
 }

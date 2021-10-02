@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { CandidateService } from 'src/app/services/candidate/candidate.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { CandidateService } from 'src/app/services/candidate/candidate.service';
 export class ViewCandidateComponent implements OnInit {
   candidates:any[]=[];
   pageOfItems: Array<any>=[];
-  constructor(private candidateService:CandidateService) { }
+  constructor(private candidateService:CandidateService, private toastr:ToastrService) { }
 
   ngOnInit(): void {
    this.reloadData();
@@ -22,11 +23,14 @@ export class ViewCandidateComponent implements OnInit {
     this.candidateService.getAllCandidate().subscribe(data=>{
       this.candidates=data.data;
     },error=>{ 
-      window.alert(error.error.message)
+     this.showError(error.error.message)
     });
   }
 
  
-  
+  showError(message:string){
+    this.toastr.error(message);
+  }
+ 
 
 }

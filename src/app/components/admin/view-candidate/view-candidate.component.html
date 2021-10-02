@@ -8,7 +8,6 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>ID</th>
           <th>First Name</th>
           <th>Last Name</th>
            <th>Email</th>
@@ -16,14 +15,10 @@
            <th>Role</th>
            <th>Experience</th>
            <th>Resume Link</th>
-           <th>Added on</th>
-           <th>updated on</th>
-           <th>updated by</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let candidate of pageOfItems">
-          <td>{{candidate.id}}</td>
           <td>{{candidate.firstName}}</td>
           <td>{{candidate.lastName}}</td>
           <td>{{candidate.emailId}}</td>
@@ -31,9 +26,6 @@
           <td>{{candidate.jobRole}}</td>
           <td>{{candidate.experience}}</td>
           <td><a [href]='candidate.resumeLink' target="_blank">click here</a></td>
-          <td>{{candidate.addedOn}}</td>
-          <td>{{candidate.updatedOn}}</td>
-          <td>{{candidate.updatedBy}}</td>
         </tr>
       </tbody>
     </table>

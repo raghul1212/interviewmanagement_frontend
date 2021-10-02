@@ -2,11 +2,11 @@
 <div class="container" id='center'>
     <div class="jumbotron" >
     <form #userForm="ngForm" (ngSubmit)='userForm.form.valid && isValidDate && isValidTime && updateInterview(userForm.value)' >
-        <h3>Update Interview with id {{id}}</h3><br>
+        <h3>Update Interview</h3><br>
         <div class="form-group col-md-10">
-          <label for="candidateid">Candidate</label>
-          <select name="canId" class="form-control" #canId="ngModel" [(ngModel)]="candidateId" required>
-            <option *ngFor="let candidate of candidates" [value]='candidate.id'>{{candidate?.id}} - {{candidate?.firstName}} {{candidate?.lastName}}</option>
+          <label for="candidateid">Candidate<span class="marker">*</span></label>
+          <select name="canId" class="form-control"  onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' #canId="ngModel" [(ngModel)]="candidateId" required>
+            <option *ngFor="let candidate of candidates" [value]='candidate.id'>{{candidate?.firstName}} {{candidate?.lastName}} - {{candidate?.emailId}} - {{candidate?.jobRole}}</option>
           </select>
         </div>
         <div class="text-danger">
@@ -15,9 +15,9 @@
         <br/>
 
           <div class="form-group col-md-10">
-            <label for="empid">Employee</label>
-            <select name="empId" class="form-control" #empId="ngModel" [(ngModel)]="employeeId" required>
-              <option *ngFor="let employee of employees" [value]='employee.id'>{{employee?.employeeId}} - {{employee?.firstName}} {{employee?.lastName}}</option>
+            <label for="empid">Employee<span class="marker">*</span></label>
+            <select name="empId" class="form-control"  onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' #empId="ngModel" [(ngModel)]="employeeId" required>
+              <option *ngFor="let employee of employees" [value]='employee.id'>{{employee?.firstName}} {{employee?.lastName}} - {{employee?.emailId}}</option>
             </select>
           </div>
           <div class="text-danger">
@@ -26,9 +26,12 @@
           <br/>
 
           <div class="form-group col-md-10">
-            <label for="interviewtype">Interview Type</label>
-            <select class="form-control"  name="interviewType" #interviewType="ngModel" [(ngModel)]="interview.interviewType" required>
-                <option *ngFor = "let interview of interviewTypes" [value]=interview>{{interview}}</option>
+            <label for="interviewtype">Interview Type<span class="marker">*</span></label>
+            <!-- <select class="form-control"  name="interviewType"  onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' #interviewType="ngModel" [(ngModel)]='interview.interviewType' required>
+                <option *ngFor = "let in of interviewTypes" [value]='in[1]'>{{in[1]}}</option>
+            </select> -->
+            <select name="interviewType" class="form-control"  onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' #interviewType="ngModel" [(ngModel)]="interview.interviewType" required>
+              <option *ngFor="let in of interviewTypes" [value]='in[1]'>{{in[1]}}</option>
             </select>
           </div>
           <div class="text-danger">
@@ -37,7 +40,7 @@
           <br/>
 
           <div class="form-group col-md-10">
-            <label for="date">Call Scheduled Date</label>
+            <label for="date">Call Scheduled Date<span class="marker">*</span></label>
             <input type="date"  class="form-control" name="callScheduledDate" (ngModelChange)='validateDate(callScheduledDate.value)'  #callScheduledDate="ngModel" [(ngModel)]='interview.callScheduledDate' required>
           </div>
           <div class="text-danger">
@@ -47,8 +50,8 @@
           <br/>
 
           <div class="form-group col-md-10">
-            <label for="time">Call Scheduled Time</label>
-            <input type="time" class="form-control" name="callScheduledTime"  #callScheduledTime="ngModel"  (ngModelChange)='validateTime(callScheduledTime.value)' [(ngModel)]=interview.callScheduledTime required>
+            <label for="time">Call Scheduled Time<span class="marker">*</span></label>
+            <input type="time" class="form-control" name="callScheduledTime"  #callScheduledTime="ngModel"  (ngModelChange)='validateTime(callScheduledTime.value)' [(ngModel)]='interview.callScheduledTime' required>
           </div>
           <div class="text-danger">
             <small *ngIf="(callScheduledTime.touched || userForm.submitted) && callScheduledTime.errors?.required">Call Scheduled Time is required</small>

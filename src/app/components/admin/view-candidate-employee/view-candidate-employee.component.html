@@ -1,6 +1,6 @@
 <app-admin></app-admin>
-<div style="text-align: center;">
-    <h2>Candidate and Employee Details for interview id: {{interview.id}}</h2> 
+<div class="text-center">
+    <h2>Candidate and Employee Details</h2> 
     
     <hr/>
     <div>
@@ -14,9 +14,6 @@
              
             <tbody>
             <td>
-                <tr>
-                    <th>ID</th> <td>{{interview.employee?.id}}</td>
-                    </tr>
                     <tr>
                         <th>First Name</th> <td>{{interview.employee?.firstName}}</td>
                     </tr>
@@ -24,22 +21,22 @@
                         <th>Last Name</th> <td>{{interview.employee?.lastName}}</td>
                     </tr>
                    <tr>
-                    <th>Email</th>  <td>{{interview.employee?.emailId}}</td>
+                    <th>Email Address</th>  <td>{{interview.employee?.emailId}}</td>
                    </tr>
                     <tr>
                         <th>Phone Number</th> <td>{{interview.employee?.phoneNumber}}</td>
                     </tr>
+                    
                     <tr>
-                        <th>Employee ID</th><td>{{interview.employee?.employeeId}}</td>
+                        <th>Designation</th><td>{{interview.employee?.designation}}</td>
                     </tr>
+
                     <tr>
-                        <th>Designation ID</th><td>{{interview.employee?.designationId}}</td>
+                        <th>Status</th><td>{{interview.employee?.status}}</td>
                     </tr>
                 </td>
                 <td>
-                    <tr>
-                        <th>ID</th> <td>{{interview.candidate?.id}}</td>
-                        </tr>
+                    
                         <tr>
                             <th>First Name</th> <td>{{interview.candidate?.firstName}}</td>
                         </tr>
@@ -47,7 +44,7 @@
                             <th>Last Name</th> <td>{{interview.candidate?.lastName}}</td>
                         </tr>
                        <tr>
-                        <th>Email</th>  <td>{{interview.candidate?.emailId}}</td>
+                        <th>Email Address</th>  <td>{{interview.candidate?.emailId}}</td>
                        </tr>
                         <tr>
                             <th>Phone Number</th> <td>{{interview.candidate?.phoneNumber}}</td>
@@ -55,6 +52,11 @@
                         <tr>
                             <th>Experience</th><td>{{interview.candidate?.experience}}</td>
                         </tr>
+
+                        <tr>
+                            <th>Job Role</th><td>{{interview.candidate?.jobRole}}</td>
+                        </tr>
+
                         <tr>
                             <th>Resume Link</th><td><a [href]="interview.candidate?.resumeLink" target="_blank">click here</a></td>
                         </tr>

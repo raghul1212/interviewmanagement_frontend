@@ -19,6 +19,10 @@ export class InterviewService {
    return this.http.get(`${this.baseUrl}`);
   }
 
+  getAllInterviewType():Observable<any>{
+    return this.http.get(`${this.baseUrl}/interview-type`);
+   }
+
   getInterviewById(id:number):Observable<any>{
     return this.http.get(`${this.baseUrl}/${id}`);
    }

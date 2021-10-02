@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Candidate, CandidateService } from 'src/app/services/candidate/candidate.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { Candidate, CandidateService } from 'src/app/services/candidate/candidat
 export class ViewCandidateByIdComponent implements OnInit {
   candidate:Candidate={};
   id:any;
-  constructor(private router:Router,private activatedRoute:ActivatedRoute,private candidateService:CandidateService) { }
+  constructor(private router:Router,private activatedRoute:ActivatedRoute,
+    private candidateService:CandidateService,private toastr:ToastrService) { }
 
   ngOnInit(): void {
       this.id=this.activatedRoute.snapshot.params['id'];
@@ -23,7 +25,11 @@ export class ViewCandidateByIdComponent implements OnInit {
   reloadCandidateData(){
     this.candidateService.getCandidateById(this.id).subscribe(data=>{
       this.candidate=data.data;
-     },error=> window.alert(error.error.message));
+     },error=> this.showError(error.error.message));
+  }
+
+  showError(message:string){
+    this.toastr.error(message);
   }
 
 }

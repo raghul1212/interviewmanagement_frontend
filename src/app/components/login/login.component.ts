@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,29 +8,35 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router) { }
-  regexEmployee:string="^emp[a-zA-Z0-9!@#$%^&*()?]{3,}$";
-  regexCandidate:string="^can[a-zA-Z0-9!@#$%^&*()?]{3,}$";
+  constructor(private router:Router,private toastr:ToastrService) { }
   ngOnInit(): void {
   }
 
   onLogin(credential:any){
     if(credential.username=='admin@gmail.com' && credential.password=='admin1'){
+      this.showSuccess();
       localStorage.setItem('adminEmail',credential.username);
-      window.alert("Welcome admin!");
       this.router.navigate(['admin']);
-    } else if(credential.password.match(this.regexEmployee)){
-      window.alert("Welcome employee!");
+    } else if(credential.password == 'emp123'){
+      this.showSuccess();
       localStorage.setItem('empEmail',credential.username);
       this.router.navigate(['employee']);
-    }else if(credential.password.match(this.regexCandidate)){
-      window.alert("Welcome candidate!");
+    }else if(credential.password == 'can123'){
+      this.showSuccess();
       localStorage.setItem('canEmail',credential.username);
       this.router.navigate(['candidate']);
     }
     else{
-      window.alert("invalid login credentials!");
+      this.showError();
     }
 
-}
+  }
+
+  showSuccess() {
+    this.toastr.success('Logged in successfully!');
+  }
+  showError(){
+    this.toastr.error('Login failed, try again!');
+  }
+
 }

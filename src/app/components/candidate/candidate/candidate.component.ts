@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-candidate',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class CandidateComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     
@@ -17,6 +18,10 @@ export class CandidateComponent implements OnInit {
   logout(){
     localStorage.removeItem('canEmail');
     this.router.navigate(['login']);
+    this.showSuccess();
   }
 
+  showSuccess() {
+    this.toastr.success('Logged out successfully!');
+  }
 }

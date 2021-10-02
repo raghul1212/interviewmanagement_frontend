@@ -8,31 +8,23 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>ID</th>
           <th>First Name</th>
           <th>Last Name</th>
-           <th>Email</th>
+           <th>Email Address</th>
            <th>Phone Number</th>
-           <th>Employee ID</th>
-           <th>Designation ID</th>
-           <th>Added on</th>
-           <th>updated on</th>
-           <th>updated by</th>
+           <th>Designation</th>
+           <th>Status</th>
            <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let employee of pageOfItems">
-          <td>{{employee.id}}</td>
           <td>{{employee.firstName}}</td>
           <td>{{employee.lastName}}</td>
           <td>{{employee.emailId}}</td>
           <td>{{employee.phoneNumber}}</td>
-          <td>{{employee.employeeId}}</td>
-          <td>{{employee.designationId}}</td>
-          <td>{{employee.addedOn}}</td>
-          <td>{{employee.updatedOn}}</td>
-          <td>{{employee.updatedBy}}</td>
+          <td>{{employee.designation}}</td>
+          <td>{{employee.status}}</td>
             <td><button (click)="deleteEmployee(employee.id)" class="btn btn-danger">Delete</button>
                 <button (click)="updateEmployee(employee.id)" class="btn btn-info">Update</button>
             </td>

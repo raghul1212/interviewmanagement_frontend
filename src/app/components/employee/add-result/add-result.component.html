@@ -3,14 +3,8 @@
     <div class="jumbotron" >
     <form #userForm="ngForm" (ngSubmit)='userForm.form.valid && addResult(userForm.value)' >
         <h3>Add Result</h3><br>
-        <div class="form-group col-md-10">
-            <label for="interviewid">Result for interview ID</label>
-          <input class="form-control" name='interviewId' [(ngModel)]=id ngModel readonly>
-          </div>
-          <br/>
-
           <div class="form-group col-md-10">
-            <label for="remarks">Enter Remarks</label>
+            <label for="remarks">Remarks<span class="marker">*</span></label>
            <textarea  name="remarks" rows="3" cols="50" minlength="6" class="form-control" #remarks="ngModel" placeholder="Enter Remarks" ngModel required></textarea>
           </div>
           <div class="text-danger">
@@ -20,9 +14,9 @@
           <br/>
 
           <div class="form-group col-md-10">
-            <label for="status">Choose Status</label>
+            <label for="status">Status<span class="marker">*</span></label>
             <select class="form-control"  name="status"  #status="ngModel" ngModel required>
-                <option value="" selected disabled></option>
+                <option value="" selected disabled>Choose Status</option>
                 <option value="Selected">Selected</option>
                 <option value="Rejected">Rejected</option>
             </select>

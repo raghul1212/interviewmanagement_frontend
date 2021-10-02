@@ -1,25 +1,19 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+ <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
     <a class="navbar-brand" href="#">Interview Management System</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
    
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-
-        <li ngbDropdown class="nav-item dropdown">
-          <a ngbDropdownToggle class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jobs</a>
-          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" routerLink="/addCandidate">Apply for a job</a>
-            <a class="dropdown-item" routerLink="/viewCurrentApplication">View Applications</a>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/addCandidate">Apply for a job</a>
         </li>
-        
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/viewCurrentApplication">View Applications</a>
+        </li>
       </ul>
     </div>
     <div>
       <button type="button" class="btn btn-primary" (click)="logout()">Log out</button>
     </div>
   </nav>
-
+  
 

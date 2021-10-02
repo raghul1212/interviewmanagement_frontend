@@ -1,10 +1,10 @@
 <app-admin></app-admin>
 <div class="container" id='center'>
     <div class="jumbotron" >
-    <form #userForm="ngForm" (ngSubmit)='userForm.form.valid && updateEmployee(userForm.value)' >
+    <form #userForm="ngForm" (ngSubmit)='isOverAllValidation() && userForm.form.valid && updateEmployee(userForm.value)' >
         <h3>Employee Updation</h3><br>
           <div class="form-group col-md-10">
-            <label for="firstname">First Name</label>
+            <label for="firstname">First Name<span class="marker">*</span></label>
             <input type="text" class="form-control" name="firstName" placeholder="First Name" #firstName="ngModel" [(ngModel)]='employee.firstName' required>
           </div>
           <div class="text-danger">
@@ -12,7 +12,7 @@
           </div>
           <br/>
           <div class="form-group col-md-10">
-            <label for="lastname">Last Name</label>
+            <label for="lastname">Last Name<span class="marker">*</span></label>
             <input type="text" class="form-control" name="lastName" placeholder="Last Name" #lastName="ngModel" [(ngModel)]='employee.lastName' required>
           </div>
           <div class="text-danger">
@@ -21,44 +21,36 @@
           <br/>
 
           <div class="form-group col-md-10">
-            <label for="employeeid">Employee Id</label>
-            <input type="number" class="form-control" min="100000" max="999999" name="employeeId" placeholder="Employee Id" #employeeId="ngModel" [(ngModel)]='employee.employeeId' required>
+            <label for="designation">Designation<span class="marker">*</span></label>
+            <select onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' class="form-control"  name="designation"  #designation="ngModel" [(ngModel)]='employee.designation' required>
+              <option value="" selected disabled>Choose Designation</option>
+                <option *ngFor = "let dest of designations" [value]='dest[1]'>{{dest[1]}}</option>
+            </select>
           </div>
           <div class="text-danger">
-            <small *ngIf="(employeeId.touched || userForm.submitted) && employeeId.errors?.required">Employee Id is required</small>
-            <small *ngIf="employeeId.errors?.min">Employee Id must be greater than or equal to 100000</small>
-            <small *ngIf="employeeId.errors?.max">Employee Id must be less than or equal to 999999</small>
+            <small *ngIf="(designation.touched || userForm.submitted) && designation.errors?.required">Designation is required</small>
           </div>
           <br/>
 
           <div class="form-group col-md-10">
-            <label for="designationid">Designation Id</label>
-            <input type="number" class="form-control" min="10000" max="99999" name="designationId" placeholder="Designation Id" #designationId="ngModel" [(ngModel)]='employee.designationId' required>
-          </div>
-          <div class="text-danger">
-            <small *ngIf="(designationId.touched || userForm.submitted) && designationId.errors?.required">Designation Id is required</small>
-            <small *ngIf="designationId.errors?.min">Designation Id must be greater than or equal to 10000</small>
-            <small *ngIf="designationId.errors?.max">Designation Id must be less than or equal to 99999</small>
-          </div>
-          <br/>
-
-          <div class="form-group col-md-10">
-            <label for="email">Email Address</label>
-            <input type="email" class="form-control" name="emailId" placeholder="Email Address" pattern="^[\w!#$%&’*+/=?`{|}~^-]+(?:\.[\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$" #emailId="ngModel" [(ngModel)]='employee.emailId' required>
+            <label for="email">Email Address<span class="marker">*</span></label>
+            <input type="email" class="form-control" name="emailId" placeholder="Email Address" (keyup)="emailIdValidation(emailId.value)" pattern="^[\w!#$%&’*+/=?`{|}~^-]+(?:\.[\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$" #emailId="ngModel" [(ngModel)]='employee.emailId' required>
           </div>
           <div class="text-danger">
             <small *ngIf="(emailId.touched || userForm.submitted) && emailId.errors?.required">Email address is required</small>
             <small *ngIf="emailId?.errors?.pattern">Enter a valid email address</small>
+            <small *ngIf="!isvalidId[0]">The Email Address already exists</small>
           </div>
           <br/>
 
           <div class="form-group col-md-10">
-            <label for="phone">Phone Number</label>
-            <input type="text" class="form-control" name="phoneNumber" placeholder="Phone Number" pattern="^(\+\d{1,3}[- ]?)?\d{10}$" #phoneNumber="ngModel" [(ngModel)]='employee.phoneNumber' required>
+            <label for="phone">Phone Number<span class="marker">*</span></label>
+            <input type="text" class="form-control" name="phoneNumber" placeholder="Phone Number" (keyup)="phoneNumberValidation(phoneNumber.value)" pattern="^(\+\d{1,3}[- ]?)?\d{10}$" #phoneNumber="ngModel" [(ngModel)]='employee.phoneNumber' required>
           </div>
           <div class="text-danger">
             <small *ngIf="(phoneNumber.touched || userForm.submitted) && phoneNumber.errors?.required">Phone number is required</small>
             <small *ngIf="phoneNumber?.errors?.pattern">Enter a valid phone number</small>
+            <small *ngIf="!isvalidId[1]">The Phone number already exists</small>
           </div>
           <br/>
         <button type="submit" class="btn btn-primary">Update Employee</button>

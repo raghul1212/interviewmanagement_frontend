@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Employee, EmployeeService } from 'src/app/services/employee/employee.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { Employee, EmployeeService } from 'src/app/services/employee/employee.se
 export class ManageEmployeeComponent implements OnInit {
    employees:Employee[]=[];
    pageOfItems: Array<any>=[];
-  constructor(private router:Router,private employeeService:EmployeeService) { }
+  constructor(private router:Router,private employeeService:EmployeeService
+    ,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.reloadData();
@@ -24,9 +26,9 @@ export class ManageEmployeeComponent implements OnInit {
   deleteEmployee(id:any){
     if(window.confirm('Are you sure to delete this employee?')==true){
       this.employeeService.deleteEmployeeById(id).subscribe(data=>{
-        window.alert(data.message);
+        this.showSuccess(data.message);
         this.reloadData();
-       },error=> window.alert(error.error.message)
+       },error=> this.showError(error.error.message)
        );
     }
   }
@@ -37,7 +39,13 @@ export class ManageEmployeeComponent implements OnInit {
   reloadData(){
     this.employeeService.getAllEmployee().subscribe(data=>{
       this.employees=data.data;
-    },error=> window.alert(error.error.message));
+    },error=> this.showError(error.error.message));
+  }
+  showSuccess(message:string){
+    this.toastr.success(message);
   }
 
+  showError(message:string){
+    this.toastr.error(message);
+  }
 }

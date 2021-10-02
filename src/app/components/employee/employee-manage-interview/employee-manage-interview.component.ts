@@ -1,5 +1,7 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Employee, EmployeeService } from 'src/app/services/employee/employee.service';
 import { Interview, InterviewService } from 'src/app/services/interview/interview.service';
 
@@ -13,14 +15,17 @@ export class EmployeeManageInterviewComponent implements OnInit {
   empEmail:string=localStorage.getItem('empEmail') as any as string;
   interviews:Interview[]=[];
   pageOfItems: Array<any>=[];
-  constructor(private router:Router,private employeeService:EmployeeService,private interviewService:InterviewService) { }
+  today=formatDate(new Date(),'yyyy-MM-dd','en_US');
+  currentTime=formatDate(new Date(),'HH:mm:ss','en_US');
+  
+  constructor(private router:Router,private employeeService:EmployeeService,
+    private interviewService:InterviewService, private toastr:ToastrService) { }
 
   ngOnInit(): void {
     if(this.empEmail!=null){
       this.reloadEmployeeData();
       this.reloadInterviewData();
     }
-    
   }
 
   onChangePage(pageOfItems: Array<any>) {
@@ -39,7 +44,7 @@ export class EmployeeManageInterviewComponent implements OnInit {
    employee.emailId=this.empEmail;
   this.interviewService.getInterviewByEmployeeEmailId(employee).subscribe(data=>{
   this.interviews=data.data;
- },error=> window.alert(error.error.message));
+ },error=> this.showError(error.error.message));
 
   }
 
@@ -48,12 +53,18 @@ export class EmployeeManageInterviewComponent implements OnInit {
     employee.emailId=this.empEmail;
     this.employeeService.getEmployeeByEmailId(employee).subscribe(data=>{
       if(data==null){
-        window.alert("Please enter a valid login credential to proceed..");
+        this.showInfo("Please enter a valid login credential to proceed..");
         this.router.navigate(['login']);
       }else{
         this.employee=data.data;
       }
      
-    },error=> window.alert(error.error.message));
+    },error=> this.showError(error.error.message));
+  }
+  showError(message:string){
+    this.toastr.error(message);
+  }
+  showInfo(message:string){
+    this.toastr.info(message);
   }
 }

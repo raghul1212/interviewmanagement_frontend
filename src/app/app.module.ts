@@ -12,7 +12,6 @@ import { ManageEmployeeComponent } from './components/admin/manage-employee/mana
 import { ManageInterviewComponent } from './components/admin/manage-interview/manage-interview.component';
 import { ManageResultComponent } from './components/admin/manage-result/manage-result.component';
 import { AddCandidateComponent } from './components/candidate/add-candidate/add-candidate.component';
-import { UpdateCandidateComponent } from './components/candidate/update-candidate/update-candidate.component';
 
 import { CandidateComponent } from './components/candidate/candidate/candidate.component';
 import { EmployeeComponent } from './components/employee/employee/employee.component';
@@ -27,10 +26,11 @@ import { ViewCandidateByIdComponent } from './components/candidate/view-candidat
 import { AddEmployeeComponent } from './components/admin/add-employee/add-employee.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewCandidateEmployeeInterviewComponent } from './components/admin/view-candidate-employee-interview/view-candidate-employee-interview.component';
-import { UpdateResultComponent } from './components/admin/update-result/update-result.component';
 import { JwPaginationModule } from 'jw-angular-pagination';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -44,7 +44,6 @@ import { JwPaginationModule } from 'jw-angular-pagination';
     ManageInterviewComponent,
     ManageResultComponent,
     AddCandidateComponent,
-    UpdateCandidateComponent,
     AddEmployeeComponent,
     CandidateComponent,
     EmployeeComponent,
@@ -57,7 +56,8 @@ import { JwPaginationModule } from 'jw-angular-pagination';
     AddResultComponent,
     ViewCandidateByIdComponent,
     ViewCandidateEmployeeInterviewComponent,
-    UpdateResultComponent,
+   
+   
   
    
   
@@ -68,7 +68,10 @@ import { JwPaginationModule } from 'jw-angular-pagination';
     FormsModule,
     NgbModule,
     HttpClientModule,
-    JwPaginationModule
+    JwPaginationModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+  
   
   ],
   providers: [],

@@ -10,3 +10,7 @@ button {
     display: block;
 }
 
+.marker{
+    padding:2px;
+    color: red;
+}

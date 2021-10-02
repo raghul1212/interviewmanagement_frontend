@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Interview, InterviewService } from 'src/app/services/interview/interview.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { Interview, InterviewService } from 'src/app/services/interview/intervie
 export class ManageInterviewComponent implements OnInit {
   interviews:Interview[]=[] ;
   pageOfItems: Array<any>=[];
-  constructor(private router:Router,private interviewService:InterviewService) { }
+  constructor(private router:Router,private interviewService:InterviewService,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.reloadData();
@@ -23,7 +24,7 @@ export class ManageInterviewComponent implements OnInit {
   reloadData(){
    this.interviewService.getAllInterview().subscribe(data=>{
     this.interviews=data.data;
-   },error=> window.alert(error.error.message));
+   },error=> this.showError(error.error.message));
   }
 
   updateInterview(id:any){
@@ -35,8 +36,8 @@ export class ManageInterviewComponent implements OnInit {
       interview.updatedBy=localStorage.getItem('adminEmail') as any as string;
       interview.status='Cancelled';
       this.interviewService.updateInterview(interview).subscribe(data=>{
-        window.alert(data.message);
-      },error=> window.alert(error.error.message));
+      this.showSuccess(data.message);
+      },error=> this.showError(error.error.message));
      
     }
    
@@ -44,5 +45,11 @@ export class ManageInterviewComponent implements OnInit {
   viewCandidateAndEmployee(id:any){
     this.router.navigate(['viewCandidateEmployee',id]);
   }
+  showSuccess(message:string){
+    this.toastr.success(message);
+  }
 
+  showError(message:string){
+    this.toastr.error(message);
+  }
 }

@@ -8,13 +8,11 @@ import { ManageInterviewComponent } from './components/admin/manage-interview/ma
 import { ManageResultComponent } from './components/admin/manage-result/manage-result.component';
 import { UpdateEmployeeComponent } from './components/admin/update-employee/update-employee.component';
 import { UpdateInterviewComponent } from './components/admin/update-interview/update-interview.component';
-import { UpdateResultComponent } from './components/admin/update-result/update-result.component';
 import { ViewCandidateEmployeeInterviewComponent } from './components/admin/view-candidate-employee-interview/view-candidate-employee-interview.component';
 import { ViewCandidateEmployeeComponent } from './components/admin/view-candidate-employee/view-candidate-employee.component';
 import { ViewCandidateComponent } from './components/admin/view-candidate/view-candidate.component';
 import { AddCandidateComponent } from './components/candidate/add-candidate/add-candidate.component';
 import { CandidateComponent } from './components/candidate/candidate/candidate.component';
-import { UpdateCandidateComponent } from './components/candidate/update-candidate/update-candidate.component';
 import { ViewCandidateByIdComponent } from './components/candidate/view-candidate-by-id/view-candidate-by-id.component';
 import { ViewCurrentApplicationComponent } from './components/candidate/view-current-application/view-current-application.component';
 
@@ -29,7 +27,6 @@ const routes: Routes = [
   {path:'candidate',component:CandidateComponent},
   {path:'employee',component:EmployeeComponent},
   {path:'addCandidate',component:AddCandidateComponent},
-  {path:'updateCandidate/:id',component:UpdateCandidateComponent},
   {path:'viewCandidate',component:ViewCandidateComponent},
   {path:'viewCandidateById/:id',component:ViewCandidateByIdComponent},
   {path:'viewCurrentApplication',component:ViewCurrentApplicationComponent},
@@ -44,7 +41,6 @@ const routes: Routes = [
   {path:'viewCandidateEmployeeInterview/:id',component:ViewCandidateEmployeeInterviewComponent},
   {path:'addResult/:id',component:AddResultComponent},
   {path:'manageResult',component:ManageResultComponent},
-  {path:'updateResult/:id',component:UpdateResultComponent},
   {path:'**',component:LoginComponent}
 
 ];

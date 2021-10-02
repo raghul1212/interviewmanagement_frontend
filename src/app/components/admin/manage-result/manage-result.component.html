@@ -8,33 +8,26 @@
     <table class="table table-striped table-responsive">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Interview ID</th>
-           <th>Candidate ID</th>
-           <th>Employee ID</th>
+           <th>Candidate Name</th>
+           <th>Job Role</th>
+           <th>Candidate Email</th>
+           <th>Employee Name</th>
            <th>Remarks</th>
            <th>Status</th>
-           <th>Added on</th>
-           <th>updated on</th>
-           <th>updated by</th>
            <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let result of pageOfItems">
-          <td>{{result.id}}</td>
-          <td>{{result.interview?.id}}</td>
-          <td>{{result.interview?.candidate?.id}}</td>
-          <td>{{result.interview?.employee?.id}}</td>
+          <td>{{result.interview?.candidate?.firstName}} {{result.interview?.candidate?.lastName}}</td>
+          <td>{{result.interview?.candidate?.jobRole}} </td>
+          <td>{{result.interview?.candidate?.emailId}}</td>
+          <td>{{result.interview?.employee?.firstName}} {{result.interview?.employee?.lastName}}</td>
           <td>{{result.remarks}}</td>
           <td>{{result.status}}</td>
-          <td>{{result.addedOn}}</td>
-          <td>{{result.updatedOn}}</td>
-          <td>{{result.updatedBy}}</td>
             <td>
-                <button (click)="updateResult(result.id)" class="btn btn-info">Update</button>
                 <button (click)="viewInterviewDetails(result.id)" class="btn btn-secondary">View</button>
-                <button (click)="sendMail(result)" class="btn btn-warning">Send email to candidate</button>
+                <button  data-toggle="modal" data-target="#exampleModal" (click)="setCandidateResult(result)" class="btn btn-warning">Send email to candidate</button>
             </td>
         </tr>
       </tbody>
@@ -48,6 +41,36 @@
   </ng-template>
 </div>
 
+<!--bootsrap modal starts-->
 
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Message to the Candidate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group col-md-13">
+        <label for="message">Message</label>
+       <textarea name='message'#message="ngModel" [(ngModel)]='customMessage' class="form-control" rows="3" cols="50" placeholder="Enter message here..." ngModel required></textarea>
+      </div>
+      <article>
+        <p>Eg: Thank you for taking the time to interview for the java developer position. We enjoyed getting to know you. We have completed all our interviews.</p>
+        <p> We are pleased to inform you that we would like to offer you java developer position. We believe your past experience and strong programming knowledge will be an asset to our company</p>
+        <p>The next steps in the process will be informed later.</p>
+        
+      </article>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)='clearCustomMessage()' data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]='message.invalid' (click)="sendMail(message.value)">Send</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!--bootsrap modal ends-->
 
