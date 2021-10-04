@@ -22,7 +22,7 @@
           <td>{{interview.callScheduledTime}}</td>
           <td>{{interview.status}}</td>
             <td>
-                <button (click)="addResult(interview.id)" class="btn btn-primary" [disabled]='(interview.callScheduledDate > today || interview.callScheduledTime > currentTime)'>Add Result</button><br><br>
+                <button (click)="addResult(interview.id)" class="btn btn-primary" [disabled]='(interview.callScheduledDate > today ||  ( today == interview.callScheduledDate && interview.callScheduledTime > currentTime))'>Add Result</button><br><br>
                 <button (click)="viewCandidate(interview.candidate.id)" class="btn btn-secondary">View</button>
             </td>
         </tr>

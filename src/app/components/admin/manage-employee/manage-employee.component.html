@@ -25,10 +25,10 @@
           <td>{{employee.phoneNumber}}</td>
           <td>{{employee.designation}}</td>
           <td>{{employee.status}}</td>
-            <td><button (click)="deleteEmployee(employee.id)" class="btn btn-danger">Delete</button>
+            <td><button  (click)="open(mymodal,employee.id)" class="btn btn-danger">Delete</button>
                 <button (click)="updateEmployee(employee.id)" class="btn btn-info">Update</button>
             </td>
-        </tr>
+        </tr>  
       </tbody>
     </table>
     <div class="card-footer pb-0 pt-3">
@@ -40,5 +40,18 @@
   </ng-template>
 </div>
 
-
-
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Are you sure to delete the employee?</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Once it is done, cannot be revert back!
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Confirm</button>
+    <button type="button" class="btn btn-outline-warning" (click)="modal.dismiss('Dismiss click')">Cancel</button>
+  </div>
+</ng-template>

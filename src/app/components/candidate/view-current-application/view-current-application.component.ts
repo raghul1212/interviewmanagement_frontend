@@ -11,7 +11,7 @@ import { Candidate, CandidateService } from 'src/app/services/candidate/candidat
 export class ViewCurrentApplicationComponent implements OnInit {
   emailId:string=localStorage.getItem('canEmail') as any as string;
   candidate:Candidate[]=[];
-  constructor(private router:Router,private candidateService:CandidateService,  private toastr:ToastrService) { }
+  constructor(private router:Router,private candidateService:CandidateService,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('canEmail')==null){

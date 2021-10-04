@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModal, NgbModalOptions, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Interview, InterviewService } from 'src/app/services/interview/interview.service';
 
 @Component({
@@ -11,7 +12,13 @@ import { Interview, InterviewService } from 'src/app/services/interview/intervie
 export class ManageInterviewComponent implements OnInit {
   interviews:Interview[]=[] ;
   pageOfItems: Array<any>=[];
-  constructor(private router:Router,private interviewService:InterviewService,private toastr:ToastrService) { }
+  closeResult: string='';
+  modalOptions:NgbModalOptions;
+  constructor(private router:Router,private interviewService:InterviewService,private toastr:ToastrService,private modalService: NgbModal) {
+    this.modalOptions = {
+      backdrop:'static',
+      backdropClass:'customBackdrop'
+    } }
 
   ngOnInit(): void {
     this.reloadData();
@@ -31,17 +38,7 @@ export class ManageInterviewComponent implements OnInit {
     this.router.navigate(['updateInterview',id]);
   }
 
-  cancelInterview(interview:any){
-    if(window.confirm('Are you sure to cancel this interview?')==true){
-      interview.updatedBy=localStorage.getItem('adminEmail') as any as string;
-      interview.status='Cancelled';
-      this.interviewService.updateInterview(interview).subscribe(data=>{
-      this.showSuccess(data.message);
-      },error=> this.showError(error.error.message));
-     
-    }
-   
-  }
+ 
   viewCandidateAndEmployee(id:any){
     this.router.navigate(['viewCandidateEmployee',id]);
   }
@@ -51,5 +48,28 @@ export class ManageInterviewComponent implements OnInit {
 
   showError(message:string){
     this.toastr.error(message);
+  }
+
+   //this method is used to confirm whether admin wants to cancel the interview or not.
+   open(content:any,interview:any) {
+    this.modalService.open(content, this.modalOptions).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      interview.updatedBy=localStorage.getItem('adminEmail') as any as string;
+      interview.status='Cancelled';
+      this.interviewService.updateInterview(interview).subscribe(data=>{
+      this.showSuccess(data.message);
+      },error=> this.showError(error.error.message));
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 }

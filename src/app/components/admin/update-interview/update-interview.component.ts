@@ -37,7 +37,7 @@ export class UpdateInterviewComponent implements OnInit {
   
   }
 updateInterview(interview:any){
-  if(window.confirm('Are you sure to update this interview?')==true){
+ 
     interview.id=this.id;
     interview.status='Rescheduled';
     interview.addedOn=this.interview.addedOn;
@@ -57,7 +57,7 @@ updateInterview(interview:any){
       this.shouldSendMail=true;
     },error=> this.showError(error.error.message));
    
-  }
+  
   
 }
   sendMail(interview:any){

@@ -31,17 +31,13 @@ todayDate=formatDate(new Date(), 'yyyy-MM-dd','en_us');
   scheduleInterview(interview:any){
     interview.status='Live';
     interview.updatedBy=localStorage.getItem('adminEmail') as any as string;
-    if (confirm("Do you want to schedule this interview?") == true) {
+    
     this.interviewService.addInterview(interview.candidateId,interview.empId,interview).subscribe(data=>{
       this.showSuccess(data.message);
-    this.shouldSendMail=true;
+      this.shouldSendMail=true;
    
     },error=> this.showError(error.error.message)
     );
-    
-    } else {
-    this.shouldSendMail=false;
-    }
    
   }
   setCandidateMail(canid:any){

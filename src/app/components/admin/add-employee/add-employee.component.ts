@@ -11,10 +11,8 @@ import { Employee, EmployeeService } from 'src/app/services/employee/employee.se
 export class AddEmployeeComponent implements OnInit {
   isvalidId=new Array(4).fill(true);
   designations:any;
-
-  constructor(private router:Router,
-    private employeeService:EmployeeService,
-    private toastr:ToastrService) { }
+  constructor(private router:Router,private employeeService:EmployeeService,
+    private toastr:ToastrService){} 
 
   ngOnInit(): void {
     this.reloadDesignationData();
@@ -23,11 +21,8 @@ addEmployee(employee:Employee){
     employee.updatedBy=localStorage.getItem('adminEmail') as any as string;
     this.employeeService.addEmployee(employee).subscribe(data=>{
       this.showSuccess(data.message);
-    if (confirm("Do you want to add one more employee?") == true) {
-      location.reload();
-    } else {
       this.router.navigate(['manageEmployee']);
-    }
+  
     },error=> {
       this.showError(error.error.message);
     }
@@ -64,9 +59,7 @@ addEmployee(employee:Employee){
       });
     }else{
       this.isvalidId[3]=true;
-    }
-      
-    
+    } 
    
   }
 
@@ -81,5 +74,5 @@ addEmployee(employee:Employee){
   showError(message:string){
     this.toastr.error(message);
   }
- 
+
 }

@@ -27,9 +27,6 @@
 
           <div class="form-group col-md-10">
             <label for="interviewtype">Interview Type<span class="marker">*</span></label>
-            <!-- <select class="form-control"  name="interviewType"  onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' #interviewType="ngModel" [(ngModel)]='interview.interviewType' required>
-                <option *ngFor = "let in of interviewTypes" [value]='in[1]'>{{in[1]}}</option>
-            </select> -->
             <select name="interviewType" class="form-control"  onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' #interviewType="ngModel" [(ngModel)]="interview.interviewType" required>
               <option *ngFor="let in of interviewTypes" [value]='in[1]'>{{in[1]}}</option>
             </select>
@@ -62,4 +59,6 @@
       </form>
 </div>
 </div>
+
+
 

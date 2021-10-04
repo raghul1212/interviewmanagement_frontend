@@ -52,7 +52,8 @@ export class EmployeeManageInterviewComponent implements OnInit {
     const employee=new Employee();
     employee.emailId=this.empEmail;
     this.employeeService.getEmployeeByEmailId(employee).subscribe(data=>{
-      if(data==null){
+      console.log(data);
+      if(data.data==null){
         this.showInfo("Please enter a valid login credential to proceed..");
         this.router.navigate(['login']);
       }else{
