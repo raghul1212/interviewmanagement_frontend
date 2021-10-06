@@ -12,20 +12,21 @@ export class EmployeeComponent implements OnInit {
   constructor(private router:Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
-   if(this.empEmail==null){
+   if(this.empEmail ==null){
     this.showInfo('Log in to continue..');
-     this.router.navigate(['login']);
+    this.router.navigate(['login']);
    }
+  
   }
 
   logout(){
     localStorage.removeItem('empEmail');
     this.router.navigate(['login']);
-    this.showSuccess();
+    this.showSuccess('Logged out successfully!');
   }
 
-  showSuccess() {
-    this.toastr.success('Logged out successfully!');
+  showSuccess(message:string) {
+    this.toastr.success(message);
   }
   showInfo(message:string) {
     this.toastr.info(message);

@@ -46,7 +46,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes)],  //the use of forRoot allows us to access our providers from any point in the application that is not lazy loaded
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Employee, EmployeeService } from 'src/app/services/employee/employee.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router,private toastr:ToastrService) { }
+  constructor(private router:Router,private toastr:ToastrService,private employeeService:EmployeeService) { }
   ngOnInit(): void {
   }
 
@@ -18,9 +19,19 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('adminEmail',credential.username);
       this.router.navigate(['admin']);
     } else if(credential.password == 'emp123'){
-      this.showSuccess();
-      localStorage.setItem('empEmail',credential.username);
-      this.router.navigate(['employee']);
+      const employee=new Employee();
+      employee.emailId=credential.username;
+       this.employeeService.getEmployeeByEmailId(employee).subscribe(data=>{
+          if(data.data==null){
+            this.showInfo('Please Login using a valid Email Address');
+            this.router.navigate(['login']);
+          }else{
+            this.showSuccess();
+            localStorage.setItem('empEmail',credential.username);
+            this.router.navigate(['employee']);
+          }
+       });
+     
     }else if(credential.password == 'can123'){
       this.showSuccess();
       localStorage.setItem('canEmail',credential.username);
@@ -37,6 +48,9 @@ export class LoginComponent implements OnInit {
   }
   showError(){
     this.toastr.error('Login failed, try again!');
+  }
+  showInfo(message:string){
+    this.toastr.info(message);
   }
 
 }
