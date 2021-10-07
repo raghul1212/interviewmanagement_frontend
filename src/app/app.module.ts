@@ -32,8 +32,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,11 +54,6 @@ import { ToastrModule } from 'ngx-toastr';
     AddResultComponent,
     ViewCandidateByIdComponent,
     ViewCandidateEmployeeInterviewComponent,
-   
-   
-  
-   
-  
   ],
   imports: [
     BrowserModule,
@@ -71,10 +64,8 @@ import { ToastrModule } from 'ngx-toastr';
     JwPaginationModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-  
-  
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

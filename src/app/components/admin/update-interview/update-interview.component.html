@@ -1,64 +1,166 @@
 <app-admin></app-admin>
-<div class="container" id='center'>
-    <div class="jumbotron" >
-    <form #userForm="ngForm" (ngSubmit)='userForm.form.valid && isValidDate && isValidTime && updateInterview(userForm.value)' >
-        <h3>Update Interview</h3><br>
-        <div class="form-group col-md-10">
-          <label for="candidateid">Candidate<span class="marker">*</span></label>
-          <select name="canId" class="form-control"  onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' #canId="ngModel" [(ngModel)]="candidateId" required>
-            <option *ngFor="let candidate of candidates" [value]='candidate.id'>{{candidate?.firstName}} {{candidate?.lastName}} - {{candidate?.emailId}} - {{candidate?.jobRole}}</option>
-          </select>
-        </div>
-        <div class="text-danger">
-          <small *ngIf="(canId.touched || userForm.submitted) && canId.errors?.required">Candidate is required</small>
-        </div>
-        <br/>
+<div class="container" id="center">
+  <div class="jumbotron">
+    <form
+      #userForm="ngForm"
+      (ngSubmit)="
+        userForm.form.valid &&
+          isValidDate &&
+          isValidTime &&
+          updateInterview(userForm.value)
+      "
+    >
+      <h3>Update Interview</h3>
+      <br />
+      <div class="form-group col-md-10">
+        <label for="candidateid">Candidate<span class="marker">*</span></label>
+        <select
+          name="canId"
+          class="form-control"
+          onfocus="this.size=3;"
+          onblur="this.size=1;"
+          onchange="this.size=1; this.blur();"
+          #canId="ngModel"
+          [(ngModel)]="candidateId"
+          required
+        >
+          <option *ngFor="let candidate of candidates" [value]="candidate.id">
+            {{ candidate?.firstName }} {{ candidate?.lastName }} -
+            {{ candidate?.emailId }} - {{ candidate?.jobRole }}
+          </option>
+        </select>
+      </div>
+      <div class="text-danger">
+        <small
+          *ngIf="
+            (canId.touched || userForm.submitted) && canId.errors?.required
+          "
+          >Candidate is required</small
+        >
+      </div>
+      <br />
 
-          <div class="form-group col-md-10">
-            <label for="empid">Employee<span class="marker">*</span></label>
-            <select name="empId" class="form-control"  onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' #empId="ngModel" [(ngModel)]="employeeId" required>
-              <option *ngFor="let employee of employees" [value]='employee.id'>{{employee?.firstName}} {{employee?.lastName}} - {{employee?.emailId}}</option>
-            </select>
-          </div>
-          <div class="text-danger">
-            <small *ngIf="(empId.touched || userForm.submitted) && empId.errors?.required">Employee is required</small>
-          </div>
-          <br/>
+      <div class="form-group col-md-10">
+        <label for="empid">Employee<span class="marker">*</span></label>
+        <select
+          name="empId"
+          class="form-control"
+          onfocus="this.size=3;"
+          onblur="this.size=1;"
+          onchange="this.size=1; this.blur();"
+          #empId="ngModel"
+          [(ngModel)]="employeeId"
+          required
+        >
+          <option *ngFor="let employee of employees" [value]="employee.id">
+            {{ employee?.firstName }} {{ employee?.lastName }} -
+            {{ employee?.emailId }}
+          </option>
+        </select>
+      </div>
+      <div class="text-danger">
+        <small
+          *ngIf="
+            (empId.touched || userForm.submitted) && empId.errors?.required
+          "
+          >Employee is required</small
+        >
+      </div>
+      <br />
 
-          <div class="form-group col-md-10">
-            <label for="interviewtype">Interview Type<span class="marker">*</span></label>
-            <select name="interviewType" class="form-control"  onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' #interviewType="ngModel" [(ngModel)]="interview.interviewType" required>
-              <option *ngFor="let in of interviewTypes" [value]='in[1]'>{{in[1]}}</option>
-            </select>
-          </div>
-          <div class="text-danger">
-            <small *ngIf="(interviewType.touched || userForm.submitted) && interviewType.errors?.required">Interview type is required</small>
-          </div>
-          <br/>
+      <div class="form-group col-md-10">
+        <label for="interviewtype"
+          >Interview Type<span class="marker">*</span></label
+        >
+        <select
+          name="interviewType"
+          class="form-control"
+          onfocus="this.size=3;"
+          onblur="this.size=1;"
+          onchange="this.size=1; this.blur();"
+          #interviewType="ngModel"
+          [(ngModel)]="interview.interviewType"
+          required
+        >
+          <option *ngFor="let in of interviewTypes" [value]="in[1]">
+            {{ in[1] }}
+          </option>
+        </select>
+      </div>
+      <div class="text-danger">
+        <small
+          *ngIf="
+            (interviewType.touched || userForm.submitted) &&
+            interviewType.errors?.required
+          "
+          >Interview type is required</small
+        >
+      </div>
+      <br />
 
-          <div class="form-group col-md-10">
-            <label for="date">Call Scheduled Date<span class="marker">*</span></label>
-            <input type="date"  class="form-control" name="callScheduledDate" (ngModelChange)='validateDate(callScheduledDate.value)'  #callScheduledDate="ngModel" [(ngModel)]='interview.callScheduledDate' required>
-          </div>
-          <div class="text-danger">
-            <small *ngIf="(callScheduledDate.touched || userForm.submitted) && callScheduledDate.errors?.required">Call Scheduled Date is required</small>
-            <small *ngIf="!isValidDate">Enter a valid Date</small>
-          </div>
-          <br/>
+      <div class="form-group col-md-10">
+        <label for="date"
+          >Call Scheduled Date<span class="marker">*</span></label
+        >
+        <input
+          type="date"
+          class="form-control"
+          name="callScheduledDate"
+          (ngModelChange)="validateDate(callScheduledDate.value)"
+          #callScheduledDate="ngModel"
+          [(ngModel)]="interview.callScheduledDate"
+          required
+        />
+      </div>
+      <div class="text-danger">
+        <small
+          *ngIf="
+            (callScheduledDate.touched || userForm.submitted) &&
+            callScheduledDate.errors?.required
+          "
+          >Call Scheduled Date is required</small
+        >
+        <small *ngIf="!isValidDate">Enter a valid Date</small>
+      </div>
+      <br />
 
-          <div class="form-group col-md-10">
-            <label for="time">Call Scheduled Time<span class="marker">*</span></label>
-            <input type="time" class="form-control" name="callScheduledTime"  #callScheduledTime="ngModel"  (ngModelChange)='validateTime(callScheduledTime.value)' [(ngModel)]='interview.callScheduledTime' required>
-          </div>
-          <div class="text-danger">
-            <small *ngIf="(callScheduledTime.touched || userForm.submitted) && callScheduledTime.errors?.required">Call Scheduled Time is required</small>
-            <small *ngIf="!isValidTime">Please select time between 10 AM and 8 PM</small>
-          </div>
-          <br/>
-        <div class='button'><button type="submit" class="btn btn-success">Update Interview</button>&nbsp;&nbsp;<input class="btn btn-warning" [disabled]='!shouldSendMail' type="button" (click)='sendMail(userForm.value)' value="Send mail to candidate and Employee" ></div>
-      </form>
+      <div class="form-group col-md-10">
+        <label for="time"
+          >Call Scheduled Time<span class="marker">*</span></label
+        >
+        <input
+          type="time"
+          class="form-control"
+          name="callScheduledTime"
+          #callScheduledTime="ngModel"
+          (ngModelChange)="validateTime(callScheduledTime.value)"
+          [(ngModel)]="interview.callScheduledTime"
+          required
+        />
+      </div>
+      <div class="text-danger">
+        <small
+          *ngIf="
+            (callScheduledTime.touched || userForm.submitted) &&
+            callScheduledTime.errors?.required
+          "
+          >Call Scheduled Time is required</small
+        >
+        <small *ngIf="!isValidTime"
+          >Please select time between 10 AM and 8 PM</small
+        >
+      </div>
+      <br />
+      <div class="button">
+        <button type="submit" class="btn btn-success">Update Interview</button
+        >&nbsp;&nbsp;<input
+          class="btn btn-warning"
+          [disabled]="!shouldSendMail"
+          type="button"
+          (click)="sendMail(userForm.value)"
+          value="Send mail to candidate and Employee"
+        />
+      </div>
+    </form>
+  </div>
 </div>
-</div>
-
-
-

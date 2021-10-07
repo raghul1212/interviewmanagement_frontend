@@ -2,33 +2,33 @@
 
 <div class="panel panel-primary text-center">
   <div class="panel-heading">
-    <h2 style="text-align: center;">Current Applications</h2>
+    <h2 style="text-align: center">Current Applications</h2>
   </div>
-  <br>
-  <div class="panel-body" *ngIf="candidate.length > 0;else elseBlock">
-    <table class="table table-striped" style="text-align: center;">
+  <br />
+  <div class="panel-body" *ngIf="candidate.length > 0; else elseBlock">
+    <table class="table table-striped" style="text-align: center">
       <thead>
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email Id</th>
-           <th>Phone Number</th>
-           <th>Job Role</th>
-           <th>Experience</th>
-           <th>Resume Link</th>
-           <th>Applied on</th>
+          <th>Phone Number</th>
+          <th>Job Role</th>
+          <th>Experience</th>
+          <th>Resume Link</th>
+          <th>Applied on</th>
         </tr>
       </thead>
       <tbody *ngFor="let can of candidate">
         <tr>
-          <td>{{can.firstName}}</td>
-          <td>{{can.lastName}}</td>
-          <td>{{can.emailId}}</td>
-          <td>{{can.phoneNumber}}</td>
-          <td>{{can.jobRole}}</td>
-          <td>{{can.experience}}</td>
-          <td><a [href]='can.resumeLink' target="_blank">click here</a></td>
-          <td>{{can.addedOn | date }}</td>
+          <td>{{ can.firstName }}</td>
+          <td>{{ can.lastName }}</td>
+          <td>{{ can.emailId }}</td>
+          <td>{{ can.phoneNumber }}</td>
+          <td>{{ can.jobRole }}</td>
+          <td>{{ can.experience }}</td>
+          <td><a [href]="can.resumeLink" target="_blank">click here</a></td>
+          <td>{{ can.addedOn | date }}</td>
         </tr>
       </tbody>
     </table>
@@ -37,8 +37,3 @@
     <h5>No application is found at the moment</h5>
   </ng-template>
 </div>
-
-
-
-
-

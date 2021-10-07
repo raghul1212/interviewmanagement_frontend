@@ -1,56 +1,60 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Employee, EmployeeService } from 'src/app/services/employee/employee.service';
+import {
+  Employee,
+  EmployeeService,
+} from 'src/app/services/employee/employee.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  constructor(
+    private router: Router,
+    private toastr: ToastrService,
+    private employeeService: EmployeeService
+  ) {}
+  ngOnInit(): void {}
 
-  constructor(private router:Router,private toastr:ToastrService,private employeeService:EmployeeService) { }
-  ngOnInit(): void {
-  }
-
-  onLogin(credential:any){
-    if(credential.username=='admin@gmail.com' && credential.password=='admin1'){
+  onLogin(credential: any) {
+    if (
+      credential.username == 'admin@gmail.com' &&
+      credential.password == 'admin1'
+    ) {
       this.showSuccess();
-      localStorage.setItem('adminEmail',credential.username);
+      localStorage.setItem('adminEmail', credential.username);
       this.router.navigate(['admin']);
-    } else if(credential.password == 'emp123'){
-      const employee=new Employee();
-      employee.emailId=credential.username;
-       this.employeeService.getEmployeeByEmailId(employee).subscribe(data=>{
-          if(data.data==null){
-            this.showInfo('Please Login using a valid Email Address');
-            this.router.navigate(['login']);
-          }else{
-            this.showSuccess();
-            localStorage.setItem('empEmail',credential.username);
-            this.router.navigate(['employee']);
-          }
-       });
-     
-    }else if(credential.password == 'can123'){
+    } else if (credential.password == 'emp123') {
+      const employee = new Employee();
+      employee.emailId = credential.username;
+      this.employeeService.getEmployeeByEmailId(employee).subscribe((data) => {
+        if (data.data == null) {
+          this.showInfo('Please Login using a valid Email Address');
+          this.router.navigate(['login']);
+        } else {
+          this.showSuccess();
+          localStorage.setItem('empEmail', credential.username);
+          this.router.navigate(['employee']);
+        }
+      });
+    } else if (credential.password == 'can123') {
       this.showSuccess();
-      localStorage.setItem('canEmail',credential.username);
+      localStorage.setItem('canEmail', credential.username);
       this.router.navigate(['candidate']);
-    }
-    else{
+    } else {
       this.showError();
     }
-
   }
 
   showSuccess() {
     this.toastr.success('Logged in successfully!');
   }
-  showError(){
+  showError() {
     this.toastr.error('Login failed, try again!');
   }
-  showInfo(message:string){
+  showInfo(message: string) {
     this.toastr.info(message);
   }
-
 }

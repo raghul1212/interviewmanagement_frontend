@@ -5,17 +5,14 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-candidate',
   templateUrl: './candidate.component.html',
-  styleUrls: ['./candidate.component.css']
+  styleUrls: ['./candidate.component.css'],
 })
 export class CandidateComponent implements OnInit {
+  constructor(private router: Router, private toastr: ToastrService) {}
 
-  constructor(private router:Router,private toastr:ToastrService) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    
-  }
-
-  logout(){
+  logout() {
     localStorage.removeItem('canEmail');
     this.router.navigate(['login']);
     this.showSuccess();

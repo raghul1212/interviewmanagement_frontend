@@ -8,9 +8,8 @@ describe('ViewCandidateEmployeeInterviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewCandidateEmployeeInterviewComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewCandidateEmployeeInterviewComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

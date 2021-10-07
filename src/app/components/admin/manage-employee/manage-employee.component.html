@@ -3,36 +3,44 @@
   <div class="panel-heading">
     <h2>Employee List</h2>
   </div>
-  <br>
-  <div class="panel-body" *ngIf="employees.length > 0;else elseBlock">
+  <br />
+  <div class="panel-body" *ngIf="employees.length > 0; else elseBlock">
     <table class="table table-striped">
       <thead>
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
-           <th>Email Address</th>
-           <th>Phone Number</th>
-           <th>Designation</th>
-           <th>Status</th>
-           <th>Actions</th>
+          <th>Email Address</th>
+          <th>Phone Number</th>
+          <th>Designation</th>
+          <th>Status</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let employee of pageOfItems">
-          <td>{{employee.firstName}}</td>
-          <td>{{employee.lastName}}</td>
-          <td>{{employee.emailId}}</td>
-          <td>{{employee.phoneNumber}}</td>
-          <td>{{employee.designation}}</td>
-          <td>{{employee.status}}</td>
-            <td><button  (click)="open(mymodal,employee.id)" class="btn btn-danger">Delete</button>
-                <button (click)="updateEmployee(employee.id)" class="btn btn-info">Update</button>
-            </td>
-        </tr>  
+          <td>{{ employee.firstName }}</td>
+          <td>{{ employee.lastName }}</td>
+          <td>{{ employee.emailId }}</td>
+          <td>{{ employee.phoneNumber }}</td>
+          <td>{{ employee.designation }}</td>
+          <td>{{ employee.status }}</td>
+          <td>
+            <button (click)="open(mymodal, employee.id)" class="btn btn-danger">
+              Delete
+            </button>
+            <button (click)="updateEmployee(employee.id)" class="btn btn-info">
+              Update
+            </button>
+          </td>
+        </tr>
       </tbody>
     </table>
     <div class="card-footer pb-0 pt-3">
-      <jw-pagination [items]="employees" (changePage)="onChangePage($event)"></jw-pagination>
+      <jw-pagination
+        [items]="employees"
+        (changePage)="onChangePage($event)"
+      ></jw-pagination>
     </div>
   </div>
   <ng-template #elseBlock>
@@ -42,16 +50,33 @@
 
 <ng-template #mymodal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Are you sure to delete the employee?</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <h4 class="modal-title" id="modal-basic-title">
+      Are you sure to delete the employee?
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    Once it is done, cannot be revert back!
-  </div>
+  <div class="modal-body">Once it is done, cannot be revert back!</div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Confirm</button>
-    <button type="button" class="btn btn-outline-warning" (click)="modal.dismiss('Dismiss click')">Cancel</button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Confirm
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-warning"
+      (click)="modal.dismiss('Dismiss click')"
+    >
+      Cancel
+    </button>
   </div>
 </ng-template>

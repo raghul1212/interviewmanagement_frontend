@@ -8,9 +8,8 @@ describe('AddInterviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddInterviewComponent ]
-    })
-    .compileComponents();
+      declarations: [AddInterviewComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

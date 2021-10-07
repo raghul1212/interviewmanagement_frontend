@@ -8,9 +8,8 @@ describe('ManageInterviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManageInterviewComponent ]
-    })
-    .compileComponents();
+      declarations: [ManageInterviewComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

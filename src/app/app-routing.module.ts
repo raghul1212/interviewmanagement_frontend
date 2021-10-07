@@ -22,31 +22,42 @@ import { EmployeeComponent } from './components/employee/employee/employee.compo
 import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  {path:'login',component:LoginComponent},
-  {path:'admin',component:AdminComponent},
-  {path:'candidate',component:CandidateComponent},
-  {path:'employee',component:EmployeeComponent},
-  {path:'addCandidate',component:AddCandidateComponent},
-  {path:'viewCandidate',component:ViewCandidateComponent},
-  {path:'viewCandidateById/:id',component:ViewCandidateByIdComponent},
-  {path:'viewCurrentApplication',component:ViewCurrentApplicationComponent},
-  {path:'updateEmployee/:id',component:UpdateEmployeeComponent},
-  {path:'addEmployee',component:AddEmployeeComponent},
-  {path:'manageEmployee',component:ManageEmployeeComponent},
-  {path:'employeeManageInterview',component:EmployeeManageInterviewComponent},
-  {path:'addInterview',component:AddInterviewComponent},
-  {path:'updateInterview/:id',component:UpdateInterviewComponent},
-  {path:'manageInterview',component:ManageInterviewComponent},
-  {path:'viewCandidateEmployee/:id',component:ViewCandidateEmployeeComponent},
-  {path:'viewCandidateEmployeeInterview/:id',component:ViewCandidateEmployeeInterviewComponent},
-  {path:'addResult/:id',component:AddResultComponent},
-  {path:'manageResult',component:ManageResultComponent},
-  {path:'**',component:LoginComponent}
-
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: 'candidate', component: CandidateComponent },
+  { path: 'employee', component: EmployeeComponent },
+  { path: 'addCandidate', component: AddCandidateComponent },
+  { path: 'viewCandidate', component: ViewCandidateComponent },
+  { path: 'viewCandidateById/:id', component: ViewCandidateByIdComponent },
+  {
+    path: 'viewCurrentApplication',
+    component: ViewCurrentApplicationComponent,
+  },
+  { path: 'updateEmployee/:id', component: UpdateEmployeeComponent },
+  { path: 'addEmployee', component: AddEmployeeComponent },
+  { path: 'manageEmployee', component: ManageEmployeeComponent },
+  {
+    path: 'employeeManageInterview',
+    component: EmployeeManageInterviewComponent,
+  },
+  { path: 'addInterview', component: AddInterviewComponent },
+  { path: 'updateInterview/:id', component: UpdateInterviewComponent },
+  { path: 'manageInterview', component: ManageInterviewComponent },
+  {
+    path: 'viewCandidateEmployee/:id',
+    component: ViewCandidateEmployeeComponent,
+  },
+  {
+    path: 'viewCandidateEmployeeInterview/:id',
+    component: ViewCandidateEmployeeInterviewComponent,
+  },
+  { path: 'addResult/:id', component: AddResultComponent },
+  { path: 'manageResult', component: ManageResultComponent },
+  { path: '**', component: LoginComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],  //the use of forRoot allows us to access our providers from any point in the application that is not lazy loaded
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)], //the use of forRoot allows us to access our providers from any point in the application that is not lazy loaded
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,87 +1,105 @@
 <app-admin></app-admin>
-<div style="text-align: center;">
-    <h2>Employee, Candidate and Interview Details</h2> 
-    
-    <hr/>
-    <div *ngIf="result">
-        <table class="table  table-striped table-responsive"> <!--table-striped used to create alternate dark and light rows-->
-           <thead>
-               <tr>
-                   <th>Employee Details</th>
-                   <th>Candidate Details</th>
-                   <th>Interview Details</th>
-                </tr>
-           </thead>
-             
-            <tbody>
+<div style="text-align: center">
+  <h2>Employee, Candidate and Interview Details</h2>
+
+  <hr />
+  <div *ngIf="result">
+    <table class="table table-striped table-responsive">
+      <!--table-striped used to create alternate dark and light rows-->
+      <thead>
+        <tr>
+          <th>Employee Details</th>
+          <th>Candidate Details</th>
+          <th>Interview Details</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <td>
+          <tr>
+            <th>First Name</th>
+            <td>{{ result.interview?.employee?.firstName }}</td>
+          </tr>
+          <tr>
+            <th>Last Name</th>
+            <td>{{ result.interview?.employee?.lastName }}</td>
+          </tr>
+          <tr>
+            <th>Email Address</th>
+            <td>{{ result.interview?.employee?.emailId }}</td>
+          </tr>
+          <tr>
+            <th>Phone Number</th>
+            <td>{{ result.interview?.employee?.phoneNumber }}</td>
+          </tr>
+
+          <tr>
+            <th>Designation</th>
+            <td>{{ result.interview?.employee?.designation }}</td>
+          </tr>
+          <tr>
+            <th>Status</th>
+            <td>{{ result.interview?.employee?.status }}</td>
+          </tr>
+        </td>
+        <td>
+          <tr>
+            <th>First Name</th>
+            <td>{{ result.interview?.candidate?.firstName }}</td>
+          </tr>
+          <tr>
+            <th>Last Name</th>
+            <td>{{ result.interview?.candidate?.lastName }}</td>
+          </tr>
+          <tr>
+            <th>Email Address</th>
+            <td>{{ result.interview?.candidate?.emailId }}</td>
+          </tr>
+          <tr>
+            <th>Phone Number</th>
+            <td>{{ result.interview?.candidate?.phoneNumber }}</td>
+          </tr>
+          <tr>
+            <th>Experience</th>
+            <td>{{ result.interview?.candidate?.experience }}</td>
+          </tr>
+          <tr>
+            <th>Job Role</th>
+            <td>{{ result.interview?.candidate?.jobRole }}</td>
+          </tr>
+          <tr>
+            <th>Resume Link</th>
             <td>
-                
-                    <tr>
-                        <th>First Name</th> <td>{{result.interview?.employee?.firstName}}</td>
-                    </tr>
-                    <tr>
-                        <th>Last Name</th> <td>{{result.interview?.employee?.lastName}}</td>
-                    </tr>
-                   <tr>
-                    <th>Email Address</th>  <td>{{result.interview?.employee?.emailId}}</td>
-                   </tr>
-                    <tr>
-                        <th>Phone Number</th> <td>{{result.interview?.employee?.phoneNumber}}</td>
-                    </tr>
-                    
-                    <tr>
-                        <th>Designation</th><td>{{result.interview?.employee?.designation}}</td>
-                    </tr>
-                    <tr>
-                        <th>Status</th><td>{{result.interview?.employee?.status}}</td>
-                    </tr>
-                </td>
-                <td>
-                    
-                        <tr>
-                            <th>First Name</th> <td>{{result.interview?.candidate?.firstName}}</td>
-                        </tr>
-                        <tr>
-                            <th>Last Name</th> <td>{{result.interview?.candidate?.lastName}}</td>
-                        </tr>
-                       <tr>
-                        <th>Email Address</th>  <td>{{result.interview?.candidate?.emailId}}</td>
-                       </tr>
-                        <tr>
-                            <th>Phone Number</th> <td>{{result.interview?.candidate?.phoneNumber}}</td>
-                        </tr>
-                        <tr>
-                            <th>Experience</th><td>{{result.interview?.candidate?.experience}}</td>
-                        </tr>
-                        <tr>
-                            <th>Job Role</th><td>{{result.interview?.candidate?.jobRole}}</td>
-                        </tr>
-                        <tr>
-                            <th>Resume Link</th><td><a [href]="result.interview?.candidate?.resumeLink" target="_blank">click here</a></td>
-                        </tr>
-                </td>
-                <td>
-                    
-                    <tr>
-                        <th>Call Scheduled Date</th><td>{{result.interview?.callScheduledDate | date}}</td>
-                    </tr>
-                    <tr>
-                        <th>Call Scheduled Time</th><td>{{result.interview?.callScheduledTime}}</td>
-                    </tr>
-                    <tr>
-                        <th>Interview Type</th><td>{{result.interview?.interviewType}}</td>
-                    </tr>
-                    <tr>
-                        <th>Status</th><td>{{result.interview?.status}}</td>
-                    </tr>
-                </td>
-
-
-
-
-            </tbody>
-          
-          </table>
-    <button (click)="backToList()" class="btn btn-primary">Back to Result List</button><br>
-    
-    </div>
+              <a
+                [href]="result.interview?.candidate?.resumeLink"
+                target="_blank"
+                >click here</a
+              >
+            </td>
+          </tr>
+        </td>
+        <td>
+          <tr>
+            <th>Call Scheduled Date</th>
+            <td>{{ result.interview?.callScheduledDate | date }}</td>
+          </tr>
+          <tr>
+            <th>Call Scheduled Time</th>
+            <td>{{ result.interview?.callScheduledTime }}</td>
+          </tr>
+          <tr>
+            <th>Interview Type</th>
+            <td>{{ result.interview?.interviewType }}</td>
+          </tr>
+          <tr>
+            <th>Status</th>
+            <td>{{ result.interview?.status }}</td>
+          </tr>
+        </td>
+      </tbody>
+    </table>
+    <button (click)="backToList()" class="btn btn-primary">
+      Back to Result List</button
+    ><br />
+  </div>
+</div>

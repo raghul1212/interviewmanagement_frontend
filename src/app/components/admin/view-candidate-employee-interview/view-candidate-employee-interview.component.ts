@@ -6,32 +6,37 @@ import { Result, ResultService } from 'src/app/services/result/result.service';
 @Component({
   selector: 'app-view-candidate-employee-interview',
   templateUrl: './view-candidate-employee-interview.component.html',
-  styleUrls: ['./view-candidate-employee-interview.component.css']
+  styleUrls: ['./view-candidate-employee-interview.component.css'],
 })
 export class ViewCandidateEmployeeInterviewComponent implements OnInit {
-  id:any;
-  result:Result={};
-  constructor(private router:Router,private activatedRoute:ActivatedRoute,
-    private resultService:ResultService, private toastr:ToastrService) { }
+  id: any;
+  result: Result = {};
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private resultService: ResultService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.id=this.activatedRoute.snapshot.params['id'];
+    this.id = this.activatedRoute.snapshot.params['id'];
     this.reloadResultData();
   }
 
-  reloadResultData(){
-    this.resultService.getResultById(this.id).subscribe(data=>{
-      this.result=data.data;
-    },error=> this.showError(error.error.message));
+  reloadResultData() {
+    this.resultService.getResultById(this.id).subscribe(
+      (data) => {
+        this.result = data.data;
+      },
+      (error) => this.showError(error.error.message)
+    );
   }
 
-  backToList(){
+  backToList() {
     this.router.navigate(['manageResult']);
   }
 
-  showError(message:string){
+  showError(message: string) {
     this.toastr.error(message);
   }
- 
-
 }

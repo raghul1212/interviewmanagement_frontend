@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "spotlessApply": "prettier src/**/**/**/**/**/**/*.{ts,js,html,css,json,md} e2e/**/*.{ts,js,json} --write",
+    "spotlessCheck": "prettier src/**/**/**/**/**/**/*.{ts,js,html,css,json,md} e2e/**/*.{ts,js,json} --c"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +27,8 @@
     "ngx-toastr": "^14.1.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "spotless": "0.0.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.7",
@@ -39,6 +42,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "prettier": "2.4.1",
     "typescript": "~4.3.5"
   }
 }
