@@ -34,7 +34,7 @@
           <td>
             <button
               *ngIf="interview.status != 'Finished'"
-              (click)="updateInterview(interview.id)"
+              (click)="updateInterview(interview.id!)"
               class="btn btn-info"
             >
               Update
@@ -44,13 +44,13 @@
                 interview.status != 'Finished' &&
                 interview.status != 'Cancelled'
               "
-              (click)="open(mymodal, interview)"
+              (click)="cancelInterview(mymodal, interview)"
               class="btn btn-danger"
             >
               Cancel
             </button>
             <button
-              (click)="viewCandidateAndEmployee(interview.id)"
+              (click)="viewCandidateAndEmployee(interview.id!)"
               class="btn btn-secondary"
             >
               View

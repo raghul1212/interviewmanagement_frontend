@@ -7,6 +7,7 @@ import {
   ModalDismissReasons,
 } from '@ng-bootstrap/ng-bootstrap';
 import { ResultService } from 'src/app/services/result/result.service';
+import { Result } from 'src/app/dto/result/result';
 
 @Component({
   selector: 'app-add-result',
@@ -43,13 +44,13 @@ export class AddResultComponent implements OnInit {
   }
 
   //this method is used to confirm the add result option
-  open(content: any, resultData: any) {
+  open(content: any, resultData: Result) {
     this.modalService.open(content, this.modalOptions).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
         resultData.updatedBy = localStorage.getItem(
           'empEmail'
-        ) as any as string;
+        ) || '';
         this.resultService.addResult(this.id, resultData).subscribe(
           (data) => {
             this.showSuccess(data.message);

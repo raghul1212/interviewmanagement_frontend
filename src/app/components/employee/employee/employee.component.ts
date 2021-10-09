@@ -8,11 +8,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./employee.component.css'],
 })
 export class EmployeeComponent implements OnInit {
-  empEmail: string = localStorage.getItem('empEmail') as any as string;
+  empEmail: string = localStorage.getItem('empEmail') || '';
   constructor(private router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    if (this.empEmail == null) {
+    if (this.empEmail == '') {
       this.showInfo('Log in to continue..');
       this.router.navigate(['login']);
     }

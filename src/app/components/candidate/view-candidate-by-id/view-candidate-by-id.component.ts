@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Candidate } from 'src/app/dto/candidate/candidate';
 import {
-  Candidate,
   CandidateService,
 } from 'src/app/services/candidate/candidate.service';
 
@@ -13,7 +13,7 @@ import {
 })
 export class ViewCandidateByIdComponent implements OnInit {
   candidate: Candidate = {};
-  id: any;
+  id: number=0;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,

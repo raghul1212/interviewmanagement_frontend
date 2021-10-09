@@ -8,24 +8,27 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  adminEmail: string = localStorage.getItem('adminEmail') as any as string;
+  adminEmail: string = localStorage.getItem('adminEmail') || '';//to maintain localstorage session for the admin
   constructor(private router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    if (this.adminEmail == null) {
+    //this.adminEmail == '' if localstorage of adminEmail is null, so we rdirect to login page
+    if (this.adminEmail == '') {
       this.showInfo('Login to continue');
       this.router.navigate(['login']);
     }
   }
-
+//once user click logout button, redirect to login page
   logout() {
     localStorage.removeItem('adminEmail');
-    this.showSuccess();
+    this.showSuccess('Logged out successfully!');
     this.router.navigate(['login']);
   }
-  showSuccess() {
-    this.toastr.success('Logged out successfully!');
+  //it is used to display success toastr message
+  showSuccess(message:string) {
+    this.toastr.success(message);
   }
+  //it is used to display info toastr message
   showInfo(message: string) {
     this.toastr.info(message);
   }

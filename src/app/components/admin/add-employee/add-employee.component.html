@@ -111,7 +111,7 @@
         <small *ngIf="emailId?.errors?.pattern"
           >Enter a valid email address</small
         >
-        <small *ngIf="!isvalidId[2]">The Email Address already exists</small>
+        <small *ngIf="!isvalidId[0]">The Email Address already exists</small>
       </div>
       <br />
 
@@ -140,7 +140,7 @@
         <small *ngIf="phoneNumber?.errors?.pattern"
           >Enter a valid phone number</small
         >
-        <small *ngIf="!isvalidId[3]">The Phone number already exists</small>
+        <small *ngIf="!isvalidId[1]">The Phone number already exists</small>
       </div>
       <br />
       <button type="submit" class="btn btn-success">Add Employee</button>

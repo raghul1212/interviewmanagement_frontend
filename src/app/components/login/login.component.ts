@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Employee } from 'src/app/dto/employee/employee';
 import {
-  Employee,
   EmployeeService,
 } from 'src/app/services/employee/employee.service';
 @Component({
@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   ) {}
   ngOnInit(): void {}
 
+  //for testing purpose we have default password for candidate, admin and employee and username as email id
   onLogin(credential: any) {
     if (
       credential.username == 'admin@gmail.com' &&

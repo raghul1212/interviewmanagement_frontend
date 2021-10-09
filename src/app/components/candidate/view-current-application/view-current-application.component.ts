@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Candidate } from 'src/app/dto/candidate/candidate';
 import {
-  Candidate,
   CandidateService,
 } from 'src/app/services/candidate/candidate.service';
 
@@ -12,7 +12,7 @@ import {
   styleUrls: ['./view-current-application.component.css'],
 })
 export class ViewCurrentApplicationComponent implements OnInit {
-  emailId: string = localStorage.getItem('canEmail') as any as string;
+  emailId:string = localStorage.getItem('canEmail') || '';//if localstorage returns a string, that values will be assigned, if null is returned then empty string('') is assigned to the variable
   candidate: Candidate[] = [];
   constructor(
     private router: Router,
@@ -21,7 +21,7 @@ export class ViewCurrentApplicationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('canEmail') == null) {
+    if (this.emailId == '') {
       this.showInfo('Log in to continue..');
       this.router.navigate(['login']);
     } else {

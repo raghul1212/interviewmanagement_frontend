@@ -2,12 +2,12 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Employee } from 'src/app/dto/employee/employee';
+import { Interview } from 'src/app/dto/interview/interview';
 import {
-  Employee,
   EmployeeService,
 } from 'src/app/services/employee/employee.service';
 import {
-  Interview,
   InterviewService,
 } from 'src/app/services/interview/interview.service';
 
@@ -18,7 +18,7 @@ import {
 })
 export class EmployeeManageInterviewComponent implements OnInit {
   employee: Employee = {};
-  empEmail: string = localStorage.getItem('empEmail') as any as string;
+  empEmail: string = localStorage.getItem('empEmail') || '';
   interviews: Interview[] = [];
   pageOfItems: Array<any> = [];
   today = formatDate(new Date(), 'yyyy-MM-dd', 'en_US');
@@ -32,7 +32,7 @@ export class EmployeeManageInterviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.empEmail != null) {
+    if (this.empEmail != '') {
       this.reloadEmployeeData();
       this.reloadInterviewData();
     }

@@ -2,9 +2,9 @@ import { Time } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Candidate } from '../candidate/candidate.service';
-import { Employee } from '../employee/employee.service';
-import { Result } from '../result/result.service';
+import { Candidate } from 'src/app/dto/candidate/candidate';
+import { Employee } from 'src/app/dto/employee/employee';
+import { Interview } from 'src/app/dto/interview/interview';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +44,7 @@ export class InterviewService {
       'content-type',
       'application/json;charset:utf-8'
     );
+   
     return this.http.post(
       `${this.baseUrl}/${candidateId}/${employeeId}`,
       interview,
@@ -113,16 +114,4 @@ export class InterviewService {
   /*employee related methods end here */
 }
 
-export class Interview {
-  id?: number;
-  interviewType?: string;
-  callScheduledDate?: Date;
-  callScheduledTime?: Time;
-  status?: string;
-  result?: Result;
-  candidate?: Candidate;
-  employee?: Employee;
-  addedOn?: Date;
-  updatedOn?: Date;
-  updatedBy?: string;
-}
+

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Interview } from '../interview/interview.service';
+import { Candidate } from 'src/app/dto/candidate/candidate';
 
 @Injectable({
   providedIn: 'root',
@@ -68,17 +68,3 @@ export class CandidateService {
   }
 }
 
-export class Candidate {
-  id?: number;
-  firstName?: string;
-  lastName?: string;
-  emailId?: string;
-  phoneNumber?: string;
-  jobRole?: string;
-  experience?: string;
-  resumeLink?: string;
-  interview?: Interview;
-  addedOn?: Date;
-  updatedOn?: Date;
-  updatedBy?: string;
-}

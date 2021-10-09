@@ -4,7 +4,7 @@
     <form
       #userForm="ngForm"
       (ngSubmit)="
-        userForm.form.valid && isValidTime && scheduleInterview(userForm.value)
+        userForm.form.valid && isValidTime && scheduleInterview(candidateId.value,empId.value,userForm.value)
       "
     >
       <h3>Schedule Interview</h3>
@@ -16,8 +16,8 @@
           onfocus="this.size=3;"
           onblur="this.size=1;"
           onchange="this.size=1; this.blur();"
-          name="candidateId"
-          (ngModelChange)="setCandidateMail(candidateId.value)"
+          name="canId"
+          (ngModelChange)="setCandidateId(candidateId.value)"
           #candidateId="ngModel"
           ngModel
           required
@@ -48,7 +48,7 @@
           onblur="this.size=1;"
           onchange="this.size=1; this.blur();"
           name="empId"
-          (ngModelChange)="setEmployeeMail(empId.value)"
+          (ngModelChange)="setEmployeeId(empId.value)"
           #empId="ngModel"
           ngModel
           required
@@ -57,7 +57,6 @@
           <option
             *ngFor="let employee of employees"
             [value]="employee.id"
-            (change)="setEmployeeMail(employee?.emailId)"
           >
             {{ employee.firstName }} {{ employee.lastName }} -
             {{ employee.emailId }}

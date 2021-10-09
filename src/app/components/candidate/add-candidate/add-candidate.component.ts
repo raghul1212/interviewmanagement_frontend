@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Candidate } from 'src/app/dto/candidate/candidate';
 import {
-  Candidate,
   CandidateService,
 } from 'src/app/services/candidate/candidate.service';
 
@@ -15,9 +15,9 @@ export class AddCandidateComponent implements OnInit {
   candidate: Candidate[] = [];
   jobRoles: any;
   experienceArray: any;
-  role?: string;
-  email?: string;
-  isValidRole: boolean = true;
+  role: string='';//role variable is used to store value of job role selected by the candidate and passed to the validateJobRole function and checks whether this candidate is able to choose this role or not, this logic is done in backend
+  email: string='';
+  isValidRole: boolean = true;//value is initially set to true and when user choose a role, then validateRole method will be invoked and checks emailId and job role and decides whether the candidate is able to choose that role or not. If false, candidate cannot choose the role 
   constructor(
     private candidateService: CandidateService,
     private router: Router,

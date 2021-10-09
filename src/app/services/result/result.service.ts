@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Interview } from '../interview/interview.service';
+import { Result } from 'src/app/dto/result/result';
 
 @Injectable({
   providedIn: 'root',
@@ -50,13 +50,4 @@ export class ResultService {
     return this.http.get(`${this.baseUrl}/employee/${id}`);
   }
 }
-export class Result {
-  id?: number;
-  remarks?: string;
-  status?: string;
-  message?: string;
-  interview?: Interview;
-  addedOn?: Date;
-  updatedOn?: Date;
-  updatedBy?: string;
-}
+
