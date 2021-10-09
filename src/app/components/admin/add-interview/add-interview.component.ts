@@ -15,15 +15,15 @@ import { InterviewService } from 'src/app/services/interview/interview.service';
   styleUrls: ['./add-interview.component.css'],
 })
 export class AddInterviewComponent implements OnInit {
-  shouldSendMail: boolean = false;//this is set to true once the admin schedule the interview(purpose: mail sending button will be enabled), otherwise false(purpose: mail sending button remains disabled)
-  candidates:Candidate[] = [];//to display the available candidate details
-  employees: Employee[] = [];//to display the available employee details
-  candidateId?: number;//id of the candidate used to get the details of the candidate for sending the interview details
-  empId?: number;//id of the employee used to get the details of the employee for sending the interview details
-  isValidTime: boolean = true;//to validate the time between 10 am and 8 pm for the interview
-  interviewTypes: [number,string][]=[];//as we did not create an entity for interview types in the backend, it passed as array of interview types of any type
-  todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en_us');//used to restrict the user from selecting past days
-  
+  shouldSendMail: boolean = false; //this is set to true once the admin schedule the interview(purpose: mail sending button will be enabled), otherwise false(purpose: mail sending button remains disabled)
+  candidates: Candidate[] = []; //to display the available candidate details
+  employees: Employee[] = []; //to display the available employee details
+  candidateId: number = 0; //id of the candidate used to get the details of the candidate for sending the interview details
+  empId: number = 0; //id of the employee used to get the details of the employee for sending the interview details
+  isValidTime: boolean = true; //to validate the time between 10 am and 8 pm for the interview
+  interviewTypes: [number, string][] = []; //as we did not create an entity for interview types in the backend, it passed as array of interview types of any type
+  todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en_us'); //used to restrict the user from selecting past days
+
   constructor(
     private candidateService: CandidateService,
     private employeeService: EmployeeService,
@@ -39,18 +39,16 @@ export class AddInterviewComponent implements OnInit {
   }
 
   //scheduleInterview is uses candidate Id, employee Id and interview details as input from the form and invoke the addInterview service to add the interview
-  scheduleInterview(canId:number,empId:number,interview: Interview) {
+  scheduleInterview(canId: number, empId: number, interview: Interview) {
     interview.status = 'Live';
-    interview.updatedBy = localStorage.getItem('adminEmail')!;//not null assertion
-    this.interviewService
-      .addInterview(canId,empId, interview)
-      .subscribe(
-        (data) => {
-          this.showSuccess(data.message);
-          this.shouldSendMail = true;//shouldSendMail is set to true once interview is scheduled successfully
-        },
-        (error) => this.showError(error.error.message)
-      );
+    interview.updatedBy = localStorage.getItem('adminEmail')!; //not null assertion
+    this.interviewService.addInterview(canId, empId, interview).subscribe(
+      (data) => {
+        this.showSuccess(data.message);
+        this.shouldSendMail = true; //shouldSendMail is set to true once interview is scheduled successfully
+      },
+      (error) => this.showError(error.error.message)
+    );
   }
   //setCandidateId is used to set the candidate id which will be useful for sending interview details to the candidate(Reason for having id is that we will be using candidate name and email id)
   setCandidateId(canId: number) {
@@ -75,8 +73,9 @@ export class AddInterviewComponent implements OnInit {
   }
 
   //validateTime is used to validate time between 10 am and 8 pm.
-  validateTime(time: string) {//getting time as string and comparing time based on string comparing
-    const minTime: string ='10:00';
+  validateTime(time: string) {
+    //getting time as string and comparing time based on string comparing
+    const minTime: string = '10:00';
     const maxTime: string = '20:00';
     this.isValidTime = time >= minTime && time <= maxTime;
   }
@@ -103,16 +102,19 @@ export class AddInterviewComponent implements OnInit {
 
   //reloadInterviewTypeData is used to load available interview types from database
   reloadInterviewTypeData() {
-    this.interviewService.getAllInterviewType().subscribe((data) => {
-      this.interviewTypes = data.data;
-    },error=> this.showError(error.error.message));
+    this.interviewService.getAllInterviewType().subscribe(
+      (data) => {
+        this.interviewTypes = data.data;
+      },
+      (error) => this.showError(error.error.message)
+    );
   }
 
   //it is used to display success toastr message
   showSuccess(message: string) {
     this.toastr.success(message);
   }
-//it is used to display error toastr message
+  //it is used to display error toastr message
   showError(message: string) {
     this.toastr.error(message);
   }

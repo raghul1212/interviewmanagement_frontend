@@ -50,4 +50,3 @@ export class ResultService {
     return this.http.get(`${this.baseUrl}/employee/${id}`);
   }
 }
-

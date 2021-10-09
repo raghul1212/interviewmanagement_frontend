@@ -26,7 +26,10 @@
           <td>{{ employee.designation }}</td>
           <td>{{ employee.status }}</td>
           <td>
-            <button (click)="deleteEmployee(mymodal, employee.id!)" class="btn btn-danger">
+            <button
+              (click)="deleteEmployee(mymodal, employee.id!)"
+              class="btn btn-danger"
+            >
               Delete
             </button>
             <button (click)="updateEmployee(employee.id!)" class="btn btn-info">

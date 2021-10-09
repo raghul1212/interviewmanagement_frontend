@@ -4,7 +4,9 @@
     <form
       #userForm="ngForm"
       (ngSubmit)="
-        userForm.form.valid && isValidTime && scheduleInterview(candidateId.value,empId.value,userForm.value)
+        userForm.form.valid &&
+          isValidTime &&
+          scheduleInterview(candidateId.value, empId.value, userForm.value)
       "
     >
       <h3>Schedule Interview</h3>
@@ -54,10 +56,7 @@
           required
         >
           <option value="" selected disabled>Choose Employee</option>
-          <option
-            *ngFor="let employee of employees"
-            [value]="employee.id"
-          >
+          <option *ngFor="let employee of employees" [value]="employee.id">
             {{ employee.firstName }} {{ employee.lastName }} -
             {{ employee.emailId }}
           </option>

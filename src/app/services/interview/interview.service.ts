@@ -44,7 +44,7 @@ export class InterviewService {
       'content-type',
       'application/json;charset:utf-8'
     );
-   
+
     return this.http.post(
       `${this.baseUrl}/${candidateId}/${employeeId}`,
       interview,
@@ -113,5 +113,3 @@ export class InterviewService {
   }
   /*employee related methods end here */
 }
-
-

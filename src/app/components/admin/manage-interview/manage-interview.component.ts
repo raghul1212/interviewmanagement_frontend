@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import {
-  NgbModal,
-  NgbModalOptions,
-  ModalDismissReasons,
-} from '@ng-bootstrap/ng-bootstrap';
-import {
-  InterviewService,
-} from 'src/app/services/interview/interview.service';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { InterviewService } from 'src/app/services/interview/interview.service';
 import { Interview } from 'src/app/dto/interview/interview';
 
 @Component({
@@ -17,9 +11,9 @@ import { Interview } from 'src/app/dto/interview/interview';
   styleUrls: ['./manage-interview.component.css'],
 })
 export class ManageInterviewComponent implements OnInit {
-  interviews: Interview[] = [];//to store array of Interview object
-  pageOfItems: Array<Interview> = [];//used for pagination
-  modalOptions: NgbModalOptions;//ngb modal options such as backdrop, backdropClass
+  interviews: Interview[] = []; //to store array of Interview object
+  pageOfItems: Array<Interview> = []; //used for pagination
+  modalOptions: NgbModalOptions; //ngb modal options such as backdrop, backdropClass
   constructor(
     private router: Router,
     private interviewService: InterviewService,
@@ -36,7 +30,7 @@ export class ManageInterviewComponent implements OnInit {
     this.reloadData();
   }
 
-  //this method is called whenever we move once intra-page in the html(pagination) 
+  //this method is called whenever we move once intra-page in the html(pagination)
   onChangePage(pageOfItems: Array<Interview>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
@@ -77,18 +71,16 @@ export class ManageInterviewComponent implements OnInit {
   cancelInterview(content: any, interview: Interview) {
     this.modalService.open(content, this.modalOptions).result.then(
       () => {
-        interview.updatedBy = localStorage.getItem(
-          'adminEmail'
-        )!;//assertion operator is used here because we are sure that adminEmail exists
-        interview.status = 'Cancelled';//updating interview status as cancelled
+        interview.updatedBy = localStorage.getItem('adminEmail')!; //assertion operator is used here because we are sure that adminEmail exists
+        interview.status = 'Cancelled'; //updating interview status as cancelled
         this.interviewService.updateInterview(interview).subscribe(
           (data) => {
             this.showSuccess(data.message);
           },
           (error) => this.showError(error.error.message)
         );
-      }
+      },
+      (reason) => {} //to catch the promise rejection
     );
   }
- 
 }

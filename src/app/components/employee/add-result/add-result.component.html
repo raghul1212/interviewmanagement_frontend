@@ -3,7 +3,7 @@
   <div class="jumbotron">
     <form
       #userForm="ngForm"
-      (ngSubmit)="userForm.form.valid && open(mymodal, userForm.value)"
+      (ngSubmit)="userForm.form.valid && addResult(mymodal, userForm.value)"
     >
       <h3>Add Result</h3>
       <br />

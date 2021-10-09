@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import {
-  NgbModal,
-  NgbModalOptions,
-  ModalDismissReasons,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ResultService } from 'src/app/services/result/result.service';
 import { Result } from 'src/app/dto/result/result';
 
@@ -15,8 +11,7 @@ import { Result } from 'src/app/dto/result/result';
   styleUrls: ['./add-result.component.css'],
 })
 export class AddResultComponent implements OnInit {
-  id: any;
-  closeResult: string = '';
+  id: number = 0; //id of the interview whose result to be added
   modalOptions: NgbModalOptions;
   constructor(
     private router: Router,
@@ -35,22 +30,22 @@ export class AddResultComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params['id'];
   }
 
+  //to display success toastr message
   showSuccess(message: string) {
     this.toastr.success(message);
   }
 
+  //to display error toastr message
   showError(message: string) {
     this.toastr.error(message);
   }
 
   //this method is used to confirm the add result option
-  open(content: any, resultData: Result) {
+  //modalService open method requires content which is coming from html ng-template modal of any type
+  addResult(content: any, resultData: Result) {
     this.modalService.open(content, this.modalOptions).result.then(
-      (result) => {
-        this.closeResult = `Closed with: ${result}`;
-        resultData.updatedBy = localStorage.getItem(
-          'empEmail'
-        ) || '';
+      () => {
+        resultData.updatedBy = localStorage.getItem('empEmail')!; //not null assertion is added here
         this.resultService.addResult(this.id, resultData).subscribe(
           (data) => {
             this.showSuccess(data.message);
@@ -59,18 +54,7 @@ export class AddResultComponent implements OnInit {
           (error) => this.showError(error.error.message)
         );
       },
-      (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      }
+      (reason) => {} //to catch the promise rejection
     );
-  }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
   }
 }

@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Interview } from 'src/app/dto/interview/interview';
+import { Result } from 'src/app/dto/result/result';
 
 @Injectable({
   providedIn: 'root',
@@ -9,9 +11,9 @@ export class AdminService {
   private baseUrl1 = 'http://localhost:8083/interview';
   constructor(private http: HttpClient) {}
   sendScheduledInterviewMail(
-    candidateId: any,
-    empId: any,
-    interview: any
+    candidateId: number,
+    empId: number,
+    interview: Interview
   ): Observable<any> {
     const headers = new HttpHeaders().set(
       'content-type',
@@ -25,9 +27,9 @@ export class AdminService {
   }
 
   sendRescheduledInterviewMail(
-    candidateId: any,
-    empId: any,
-    interview: any
+    candidateId: number,
+    empId: number,
+    interview: Interview
   ): Observable<any> {
     const headers = new HttpHeaders().set(
       'content-type',
@@ -40,7 +42,7 @@ export class AdminService {
     );
   }
   private baseUrl2 = 'http://localhost:8083/result';
-  sendResultMail(result: any): Observable<any> {
+  sendResultMail(result: Result): Observable<any> {
     const headers = new HttpHeaders().set(
       'content-type',
       'application/json;charset:utf-8'

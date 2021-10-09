@@ -9,8 +9,8 @@ import { CandidateService } from 'src/app/services/candidate/candidate.service';
   styleUrls: ['./view-candidate.component.css'],
 })
 export class ViewCandidateComponent implements OnInit {
-  candidates: Candidate[] = [];//to store available candidate list
-  pageOfItems: Array<Candidate> = [];//used for pagination
+  candidates: Candidate[] = []; //to store available candidate list
+  pageOfItems: Array<Candidate> = []; //used for pagination
   constructor(
     private candidateService: CandidateService,
     private toastr: ToastrService

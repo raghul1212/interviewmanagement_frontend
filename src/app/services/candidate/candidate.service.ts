@@ -67,4 +67,3 @@ export class CandidateService {
     return this.http.put<any>(`${this.baseUrl}`, candidate, { headers });
   }
 }
-

@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Interview } from 'src/app/dto/interview/interview';
-import {
-  InterviewService,
-} from 'src/app/services/interview/interview.service';
+import { InterviewService } from 'src/app/services/interview/interview.service';
 
 @Component({
   selector: 'app-view-candidate-employee',
@@ -12,9 +10,9 @@ import {
   styleUrls: ['./view-candidate-employee.component.css'],
 })
 export class ViewCandidateEmployeeComponent implements OnInit {
-  interview: Interview = {};//to display candidate and employee details of a specific interview
-  id: number=0;//id of the interview to be displayed
-  length:number=1;//length of object, to check object is empty or not. default length is 1, if object is empty, we replace with 0 after invoking loadInterviewData
+  interview: Interview = {}; //to display candidate and employee details of a specific interview
+  id: number = 0; //id of the interview to be displayed
+  length: number = 1; //length of object, to check object is empty or not. default length is 1, if object is empty, we replace with 0 after invoking loadInterviewData
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -38,10 +36,10 @@ export class ViewCandidateEmployeeComponent implements OnInit {
       (data) => {
         this.interview = data.data;
       },
-      (error) =>{
+      (error) => {
         this.showError(error.error.message);
-        this.length=0;
-      } 
+        this.length = 0;
+      }
     );
   }
   //it is used to display error toastr message

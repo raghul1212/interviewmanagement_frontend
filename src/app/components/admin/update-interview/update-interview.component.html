@@ -4,9 +4,7 @@
     <form
       #userForm="ngForm"
       (ngSubmit)="
-        userForm.form.valid &&
-          isValidTime &&
-          updateInterview(userForm.value)
+        userForm.form.valid && isValidTime && updateInterview(userForm.value)
       "
     >
       <h3>Update Interview</h3>

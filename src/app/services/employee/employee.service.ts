@@ -59,4 +59,3 @@ export class EmployeeService {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 }
-

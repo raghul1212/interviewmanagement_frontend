@@ -26,15 +26,15 @@
               (click)="addResult(interview.id)"
               class="btn btn-primary"
               [disabled]="
-                interview.callScheduledDate > today ||
+                interview.callScheduledDate! > today ||
                 (today == interview.callScheduledDate &&
-                  interview.callScheduledTime > currentTime)
+                  interview.callScheduledTime! > currentTime)
               "
             >
               Add Result</button
             ><br /><br />
             <button
-              (click)="viewCandidate(interview.candidate.id)"
+              (click)="viewCandidate(interview!.candidate!.id)"
               class="btn btn-secondary"
             >
               View
