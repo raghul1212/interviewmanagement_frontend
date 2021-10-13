@@ -68,12 +68,19 @@ export class UpdateEmployeeComponent implements OnInit {
     if (emailId != null) {
       const employee = new Employee(); //as getEmployeeByEmailId only supports email in the form of Employee object
       employee.emailId = emailId;
-      this.employeeService.getEmployeeByEmailId(employee).subscribe((data) => {
-        this.isvalidId[0] =
-          data.data == null ? true : data.data.id == this.employee.id;
-        //data.data is null if the email to be updated does not already exist in the database, so it is possible to update the email
-        //if not null then check the updated email is same as previous email id of the same employee, if yes then also possible to update the email
-      });
+      this.employeeService.getEmployeeByEmailId(employee).subscribe(
+        (data) => {
+          this.isvalidId[0] =
+            data.data == null ? true : data.data.id == this.employee.id;
+          //data.data is null if the email to be updated does not already exist in the database, so it is possible to update the email
+          //if not null then check the updated email is same as previous email id of the same employee, if yes then also possible to update the email
+        },
+        (error) => {
+          if (error.status) {
+            this.isvalidId[0] = true; //if 404 error occurs, email id is valid
+          }
+        }
+      );
     } else {
       this.isvalidId[0] = true; //if email is not filled
     }
@@ -84,12 +91,19 @@ export class UpdateEmployeeComponent implements OnInit {
     if (phoneNumber != null) {
       const employee = new Employee(); //as getEmployeeByPhone only supports phone number in the form of Employee object
       employee.phoneNumber = phoneNumber;
-      this.employeeService.getEmployeeByPhone(employee).subscribe((data) => {
-        this.isvalidId[1] =
-          data.data == null ? true : data.data.id == this.employee.id;
-        //data.data is null if the phone number to be updated does not already exist in the database, so it is possible to update the phone number
-        //if not null then check the updated phone number is same as previous phone number of the same employee, if yes then also possible to update the phone number
-      });
+      this.employeeService.getEmployeeByPhone(employee).subscribe(
+        (data) => {
+          this.isvalidId[1] =
+            data.data == null ? true : data.data.id == this.employee.id;
+          //data.data is null if the phone number to be updated does not already exist in the database, so it is possible to update the phone number
+          //if not null then check the updated phone number is same as previous phone number of the same employee, if yes then also possible to update the phone number
+        },
+        (error) => {
+          if (error.status) {
+            this.isvalidId[1] = true; //if 404 error occurs, email id is valid
+          }
+        }
+      );
     } else {
       this.isvalidId[1] = true; //if phone number is not filled
     }

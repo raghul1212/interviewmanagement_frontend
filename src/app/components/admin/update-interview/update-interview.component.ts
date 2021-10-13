@@ -24,6 +24,7 @@ export class UpdateInterviewComponent implements OnInit {
   candidateId: number = 0; //id of candidate whose interview is to be updated
   employeeId: number = 0; //id of employee whose interview is to be updated
   isValidTime: boolean = true; //to set true if time between 10 am and 8 pm
+  todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en_us'); //used to restrict the user from selecting past days
   interviewTypes: any; //as we did not create an entity for intevriew types, it is passed as any type from backend
 
   constructor(
@@ -44,14 +45,14 @@ export class UpdateInterviewComponent implements OnInit {
   }
 
   //to update the interview details, we are only updating part of data, so ensure that other data remains same
-  updateInterview(interview: Interview) {
+  updateInterview(interview: Interview, canId: number, empId: number) {
     interview.id = this.id;
     interview.status = 'Rescheduled'; //changing interview status to Rescheduled
     interview.addedOn = this.interview.addedOn;
     interview.updatedBy = localStorage.getItem('adminEmail')!; //not null assertion is added here
     //this for loop is used to get the employee details whose employee id is selected in the html page
     for (let emp of this.employees) {
-      if (emp.id == interview.employee!.id) {
+      if (emp.id == empId) {
         //not null assertion is added here
         interview.employee = emp;
         break;
@@ -59,7 +60,7 @@ export class UpdateInterviewComponent implements OnInit {
     }
     //this for loop is used to get the candidate details whose candidate id is selected in the html page
     for (let can of this.candidates) {
-      if (can.id == interview.candidate!.id) {
+      if (can.id == canId) {
         //not null assertion is added here
         interview.candidate = can;
         break;

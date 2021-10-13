@@ -38,7 +38,6 @@ export class AddEmployeeComponent implements OnInit {
     this.employeeService.getAllDesignation().subscribe(
       (data) => {
         this.designations = data.data;
-        console.log(data.data);
       },
       (error) => this.showError(error.error.message)
     );
@@ -50,9 +49,16 @@ export class AddEmployeeComponent implements OnInit {
     if (emailId != null) {
       const employee = new Employee(); //as getEmployeeByEmailId accepts only employee object, so we make an employee object with given Email Id
       employee.emailId = emailId;
-      this.employeeService.getEmployeeByEmailId(employee).subscribe((data) => {
-        this.isvalidId[0] = data.data == null ? true : false;
-      });
+      this.employeeService.getEmployeeByEmailId(employee).subscribe(
+        (data) => {
+          this.isvalidId[0] = data.data == null ? true : false;
+        },
+        (error) => {
+          if (error.status) {
+            this.isvalidId[0] = true; //if 404 error occurs, email id is valid
+          }
+        }
+      );
     } else {
       this.isvalidId[0] = true; //as this method called onkeyup from html, there is a possibility of having null value(if the field is not filled)
     }
@@ -64,9 +70,16 @@ export class AddEmployeeComponent implements OnInit {
     if (phoneNumber != null) {
       const employee = new Employee(); //as getEmployeeByPhone accepts only employee object, so we make an employee object with given phone number
       employee.phoneNumber = phoneNumber;
-      this.employeeService.getEmployeeByPhone(employee).subscribe((data) => {
-        this.isvalidId[1] = data.data == null ? true : false;
-      });
+      this.employeeService.getEmployeeByPhone(employee).subscribe(
+        (data) => {
+          this.isvalidId[1] = data.data == null ? true : false;
+        },
+        (error) => {
+          if (error.status == 404) {
+            this.isvalidId[1] = true;
+          }
+        }
+      );
     } else {
       this.isvalidId[1] = true; //as this method called onkeyup from html, there is a possibility of having null value(if the field is not filled)
     }

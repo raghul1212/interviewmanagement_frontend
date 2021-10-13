@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           }
         },
         (error) => {
-          this.showError('Login Failed');
+          this.showError('Login Failed! Unauthorized Employee Email Address');
         }
       );
     }

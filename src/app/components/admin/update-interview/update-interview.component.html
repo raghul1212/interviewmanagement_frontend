@@ -4,7 +4,9 @@
     <form
       #userForm="ngForm"
       (ngSubmit)="
-        userForm.form.valid && isValidTime && updateInterview(userForm.value)
+        userForm.form.valid &&
+          isValidTime &&
+          updateInterview(userForm.value, canId.value, empId.value)
       "
     >
       <h3>Update Interview</h3>
@@ -102,6 +104,7 @@
         <input
           type="date"
           class="form-control"
+          [min]="todayDate"
           name="callScheduledDate"
           #callScheduledDate="ngModel"
           [(ngModel)]="interview.callScheduledDate"
