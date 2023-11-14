@@ -1,0 +1,105 @@
+<app-admin></app-admin>
+<div class="panel panel-primary text-center">
+  <div class="panel-heading">
+    <h2>Interview List</h2>
+  </div>
+  <br />
+  <div class="panel-body" *ngIf="interviews.length > 0; else elseBlock">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Call Scheduled Date</th>
+          <th>Call Scheduled Time</th>
+          <th>Status</th>
+          <th>Candidate Name</th>
+          <th>Employee Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let interview of pageOfItems">
+          <td>{{ interview.interviewType }}</td>
+          <td>{{ interview.callScheduledDate | date }}</td>
+          <td>{{ interview.callScheduledTime }}</td>
+          <td>{{ interview.status }}</td>
+          <td>
+            {{ interview.candidate?.firstName }}
+            {{ interview.candidate?.lastName }}
+          </td>
+          <td>
+            {{ interview.employee?.firstName }}
+            {{ interview.employee?.lastName }}
+          </td>
+          <td>
+            <button
+              *ngIf="interview.status != 'Finished'"
+              (click)="updateInterview(interview.id!)"
+              class="btn btn-info"
+            >
+              Update
+            </button>
+            <button
+              *ngIf="
+                interview.status != 'Finished' &&
+                interview.status != 'Cancelled'
+              "
+              (click)="cancelInterview(mymodal, interview)"
+              class="btn btn-danger"
+            >
+              Cancel
+            </button>
+            <button
+              (click)="viewCandidateAndEmployee(interview.id!)"
+              class="btn btn-secondary"
+            >
+              View
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="card-footer pb-0 pt-3">
+      <jw-pagination
+        [items]="interviews"
+        (changePage)="onChangePage($event)"
+      ></jw-pagination>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <h5>No Interview is found at the moment</h5>
+  </ng-template>
+</div>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Are you sure to cancel the interview?
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">Once it is done, cannot be revert back!</div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Confirm
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-warning"
+      (click)="modal.dismiss('Save click')"
+    >
+      Cancel
+    </button>
+  </div>
+</ng-template>

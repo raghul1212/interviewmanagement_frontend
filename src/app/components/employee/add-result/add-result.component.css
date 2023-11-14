@@ -1,0 +1,15 @@
+#center {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+h3 {
+  text-align: center;
+}
+.center {
+  margin: 0 auto;
+  display: block;
+}
+.marker {
+  padding: 2px;
+  color: red;
+}
